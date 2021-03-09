@@ -15,7 +15,7 @@ class CreateTrainingProgram extends Migration
     {
         Schema::create('training_programs', function (Blueprint $table) {
             $table->id();
-            $table->string('name_program'); //programa
+            $table->string('name_program')->unique(); //programa
             $table->timestamps();
         });
     }

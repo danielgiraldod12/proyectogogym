@@ -16,13 +16,12 @@ class AsistsController extends Controller
         return view('asist.asist-list', compact('asists'));
     }
 
-    public function createasistencia($id){
-        $nameUser = User::query()->where('id','=',$id)->first();
+    public function createasistencia(User $id){
 
         $asist = new Asist();
 
-        $asist->id_user = $id;
-        $asist->name = $nameUser->name;
+        $asist->id_user = $id->id;
+        $asist->name = $id->name;
         $asist->createdBy = Auth::user()->email;
 
         $asist->save();

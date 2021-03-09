@@ -3,6 +3,14 @@
 @section('title', 'Datatables - Edit')
 
 @section('content')
+@if(Session::has('message'))
+    <div class="alert alert-danger" role="alert">
+        {{ Session::get('message') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
 <div class="d-flex justify-content-center">
     <div class="card w-50">
         <div class="card-body">

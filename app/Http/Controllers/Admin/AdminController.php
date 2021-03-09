@@ -76,6 +76,7 @@ class AdminController extends Controller
                 'training_centers.name_center']) //Centro del usuario con inner join
             ->get();
         //Le retorno la vista al controlador y le digo que puede usar la variable datatables en la vista con el compact
+
         return view('user/users', compact('datatables'));
     }
 
@@ -164,9 +165,6 @@ class AdminController extends Controller
             return redirect()->route('edit' , $id)->with('message', $message);
         }
 
-        //$id->save(); //Le digo que guarde la informacion
-        /* Le digo que me redireccione a la vista de datatables con un mensaje */
-        //return redirect()->route('users' , $id)->with('message','¡Actualización de usuario satisfactoria!');
     }
 
     public function destroy(User $id){

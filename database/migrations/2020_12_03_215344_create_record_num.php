@@ -15,7 +15,7 @@ class CreateRecordNum extends Migration
     {
         Schema::create('record_nums', function (Blueprint $table) {
             $table->id();
-            $table->integer('record_num'); //ficha
+            $table->integer('record_num')->unique(); //ficha
             $table->unsignedBigInteger('id_training_program');
             $table->timestamps();
 

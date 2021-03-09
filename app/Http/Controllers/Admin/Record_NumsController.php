@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Record_num;
 use App\Models\Training_program;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class Record_NumsController extends Controller
@@ -43,10 +44,24 @@ class Record_NumsController extends Controller
         $id->record_num = $request->record_num;
         $id->id_training_program = $request->id_training_program;
 
-        $id->save(); //Le digo que guarde la informacion
+        try {
+            $error = !$id->save();
+        } catch (QueryException $e) {
+            $error = true;
+            if ($e->getCode() === "23000") {
+                $message = "¡Ya existe una ficha con ese numero!";
+            }
+        }
+
+        if (!$error) {
+            /* Le digo que me redireccione a la vista de datatables con un mensaje */
+            return redirect()->route('record_num' , $id)->with('message','¡Ficha creada satisfactoriamente!');
+        } else {
+            return redirect()->route('creatern' , $id)->with('message', $message);
+        }
 
         /* Le digo que me redireccione a la vista de datatables con un mensaje */
-        return redirect()->route('record_num' , $id)->with('message','¡Ficha creada satisfactoriamente!');
+
     }
 
     public function editrn(Record_num $id){
@@ -66,8 +81,22 @@ class Record_NumsController extends Controller
         $id->record_num = $request->record_num;
         $id->id_training_program = $request->id_training_program;
 
-        $id->save(); //Le digo que guarde la informacion
-        return redirect()->route('record_num' , $id)->with('message','¡Actualización de ficha satisfactoria!');
+        try {
+            $error = !$id->save();
+        } catch (QueryException $e) {
+            $error = true;
+            if ($e->getCode() === "23000") {
+                $message = "¡Ya existe una ficha con ese numero!";
+            }
+        }
+
+        if (!$error) {
+            /* Le digo que me redireccione a la vista de datatables con un mensaje */
+            return redirect()->route('record_num' , $id)->with('message','¡Actualización de ficha satisfactoria!');
+        } else {
+            return redirect()->route('creatern' , $id)->with('message', $message);
+        }
+
     }
 
     public function destroyrn(Record_num $id){

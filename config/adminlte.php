@@ -322,6 +322,25 @@ return [
             ]
         ],
         [
+            'text' => 'Programas', //Como hacer multiniveles
+            'icon' => 'fas fa-folder',
+            'can'  => 'events',
+            'submenu' => [
+                [
+                    'text' => 'Visualizar Programas',
+                    'url' => 'programs',
+                    'icon' => 'fas fa-fw fa-table',
+                    'can'  => 'programs',
+                ],
+                [
+                    'text' => 'Crear Programas',
+                    'url' => 'programs/createprogram',
+                    'icon' => 'fas fa-folder-plus',
+                    'can'  => 'createprog',
+                ],
+            ]
+        ],
+        [
             'text' => 'Eventos', //Como hacer multiniveles
             'icon' => ' far fa-calendar',
             'can'  => 'events',
@@ -368,11 +387,6 @@ return [
             'url'  => 'roles',
             'icon' => 'fas fa-fw fa-user',
             'can' => 'roles'
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
         ],
 
         ['header' => 'CONFIGURACION DE CUENTA'],
