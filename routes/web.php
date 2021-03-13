@@ -28,6 +28,7 @@ Route::get('imc', [ImcController::class, 'cimc'])->name('imc');
 
 Route::post('home', [ HomeController::class,'store'])->name('contactanos.store');//para enviar el correo
 
+Route::get('/calendario', [HomeController::class, 'calendar'])->name('calendar');
 
 /*
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

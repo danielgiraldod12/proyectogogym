@@ -23,7 +23,6 @@ class UserSeeder extends Seeder
             'id_record_num' => '1',
             'id_training_program' => '1',
             'id_training_center' => '1',
-            'id_rol' => '1',
             'password' => bcrypt('12345678')
         ])->assignRole('Administrador');
 
@@ -35,7 +34,6 @@ class UserSeeder extends Seeder
             'id_record_num' => '1',
             'id_training_program' => '1',
             'id_training_center' => '1',
-            'id_rol' => '1',
             'password' => bcrypt('12345678')
         ]);
 

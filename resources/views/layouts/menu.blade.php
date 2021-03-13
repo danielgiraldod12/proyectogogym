@@ -6,7 +6,7 @@
     <title>@yield('title')</title>
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"> <!-- link de los iconos -->
-  
+
 </head>
 <body>
     <!-- header menu -->
@@ -42,7 +42,7 @@
             <div class="bmi-gender">
                 <a class="btn-gender" id="male">
                     <img alt="Masculino" src="https://www.clinicalascondes.cl/Dev_CLC/media/Imagenes/redi_imc/btn-man.png"> <br>
-                    <span class="caption">Masculino</span> 
+                    <span class="caption">Masculino</span>
                 </a>
                 <a class="btn-gender"  id="female">
                  <img alt="Femenino" src="https://www.clinicalascondes.cl/Dev_CLC/media/Imagenes/redi_imc/btn-woman.png"><br>
@@ -54,21 +54,21 @@
          <div class="parraf">
             <h2>¿Cómo se mide el IMC?</h2><br>
             <p >
-                La fórmula del IMC es el peso 
-                en kilógramos dividido por el 
-                cuadrado de la altura en 
-                metros (kg/m2). <br><br> El IMC es una 
-                indicación simple de la relación 
-                entre el peso y la talla que se 
-                utiliza frecuentemente para 
-                identificar el sobrepeso y la 
-                obesidad en los adultos, tanto a 
-                nivel individual como 
+                La fórmula del IMC es el peso
+                en kilógramos dividido por el
+                cuadrado de la altura en
+                metros (kg/m2). <br><br> El IMC es una
+                indicación simple de la relación
+                entre el peso y la talla que se
+                utiliza frecuentemente para
+                identificar el sobrepeso y la
+                obesidad en los adultos, tanto a
+                nivel individual como
                 poblacional.</p>
          </div>
          </div>
 
-         
+
          <div class="sectionform" id="formimcprincipal">
              <div class="form">
                  <form action=""  >
@@ -99,8 +99,8 @@
                 </div>
                 <div class="titulorecomendacion"> <h1>Recomendación</h1></div>
                <div class="mensjaeimc" id="delgado" >
-                   <p>La delgadez puede deberse a diversos factores, 
-                    tales como genéticos y dietéticos. Independiente de su causa, 
+                   <p>La delgadez puede deberse a diversos factores,
+                    tales como genéticos y dietéticos. Independiente de su causa,
                     es importante para tu bienestar mantener un peso saludable.</p>
                </div>
                <div class="mensjaeimc" id="normal" >
@@ -108,13 +108,13 @@
                </div>
 
                <div class="mensjaeimc" id="sobrepeso" >
-               <p>  Una mala alimentación y hábitos sedentarios pueden contribuir a 
+               <p>  Una mala alimentación y hábitos sedentarios pueden contribuir a
                 acumular grasa en tu cuerpo, lo que puede llevar a problemas médicos en el futuro.</p>
                </div>
 
                <div class="mensjaeimc" id="obeso" >
-                <p>Cuidado, la obesidad genera complicaciones mayores en el 
-                    organismo y acorta la vida. Es esencial abordar este estado con una 
+                <p>Cuidado, la obesidad genera complicaciones mayores en el
+                    organismo y acorta la vida. Es esencial abordar este estado con una
                     dieta balanceada, ejercicio y, en determinadas ocasiones, con cirugía.</p>
                </div><br>
                <div class="butonimcc">
@@ -152,6 +152,7 @@
     </script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/funciones.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.js"></script>
 
 </body>
 </html>

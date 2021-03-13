@@ -22,7 +22,6 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('id_record_num')->nullable();//ficha
             $table->unsignedBigInteger('id_training_program')->nullable();//programa
             $table->unsignedBigInteger('id_training_center')->nullable(); //centro
-            $table->unsignedBigInteger('id_rol')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();

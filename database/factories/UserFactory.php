@@ -31,7 +31,6 @@ class UserFactory extends Factory
             'id_record_num' => $this->faker->randomElement(['1','2']),
             'id_training_program' =>$this->faker->randomElement(['1','2']),
             'id_training_center'=>$this->faker->randomElement(['1']),
-            'id_rol'=>$this->faker->randomElement(['1','2','3']),
             'created_at' => $this->faker->date("2020-m-d H:i:s"),
             'password' => bcrypt($identification_num), // password
         ];
