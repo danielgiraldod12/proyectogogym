@@ -243,7 +243,7 @@ return [
             'can'  => 'manage-blog',
         ],
         [
-            'text' => 'Home',
+            'text' => 'Inicio',
             'route'  => 'dashboard',
             'icon' => 'fas fa-fw fa-home',
         ],
@@ -392,7 +392,7 @@ return [
         ['header' => 'CONFIGURACION DE CUENTA'],
         [
             'text' => 'profile',
-            'url'  => 'profile',
+            'url'  => 'profile/',
             'icon' => 'fas fa-fw fa-user',
         ]
     ],

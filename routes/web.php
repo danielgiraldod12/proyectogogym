@@ -26,7 +26,7 @@ Route::get('/', [HomeController::class, 'home'])->name('home');
 
 Route::get('imc', [ImcController::class, 'cimc'])->name('imc');
 
-Route::post('home', [ HomeController::class,'store'])->name('contactanos.store');//para enviar el correo
+Route::post('home', [HomeController::class,'store'])->name('contactanos.store');//para enviar el correo
 
 Route::get('/calendario', [HomeController::class, 'calendar'])->name('calendar');
 

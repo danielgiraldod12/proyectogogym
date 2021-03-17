@@ -65,7 +65,7 @@ Route::post('createasist/{id}', [AsistsController::class, 'createasistencia'])->
 Route::delete('asistencia/{id}/delete', [AsistsController::class, 'destroyasistencia'])->middleware('can:destroyasistencia')->name('destroyasistencia');
 //Perfil
 Route::get('profile', [AdminController::class, 'profile'])->middleware('can:dashboard.profile')->name('dashboard.profile');
-
+Route::put('profile/{id}/update', [AdminController::class, 'updateprofile'])->name('updateprofile');
 
 //Graficas usuarios
 Route::get('dashboard/chart1', [ChartController::class, 'chart1'])->middleware('can:chart.first')->name('chart.first');

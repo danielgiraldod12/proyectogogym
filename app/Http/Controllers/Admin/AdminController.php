@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -147,6 +148,9 @@ class AdminController extends Controller
         $id->id_record_num = $request->id_record_num;
         $id->id_training_program = $request->id_training_program;
         $id->id_training_center = $request->id_training_center;
+        if($request->password){
+            $id->password = Hash::make($request->password);
+        }
 
         try {
             $error = !$id->save();
@@ -174,7 +178,20 @@ class AdminController extends Controller
     }
 
     public function profile(){
-        return view('profile'); //Vista perfil
+        $user = Auth::user();
+
+        return view("profile")->with("user", $user);
+        //return view('profile'); //Vista perfil
+    }
+
+    public function updateprofile(Request $request, User $id){
+        $user = Auth::user();
+        $UserPassword = User::query()->select('password')->where('id',$id)->first();
+        if ($request->current_password == $UserPassword) {
+            $id->password = $request->password;
+            $id->save();
+        }
+        return redirect()->route('dashboard.profile');
     }
 
 }

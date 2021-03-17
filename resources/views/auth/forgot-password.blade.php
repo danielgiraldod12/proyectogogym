@@ -1,34 +1,35 @@
-<x-guest-layout>
-    <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
+@extends('./layouts.background')
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
-        </div>
+@section('title', 'GoGym|Login')
 
+@section('content')
+
+
+    <div class="login-box">
         @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
+            <div style="color: orange;">
+                <h4 style="color: orangered;">{{ session('status') }}</h4>
             </div>
         @endif
-
-        <x-jet-validation-errors class="mb-4" />
-
         <form method="POST" action="{{ route('password.email') }}">
             @csrf
-
-            <div class="block">
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+            <div class="user-box">
+                <input type="text" id="email" name="email" required onkeypress="return (event.charCode >= 48 && event.charCode <= 57 || event.charCode >=65 && event.charCode <=90 || event.charCode >=97 && event.charCode <=122 || event.charCode ==64 || event.charCode ==46 )">
+                <label>Correo electronico</label>
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <x-jet-button>
-                    {{ __('Email Password Reset Link') }}
-                </x-jet-button>
+            <div class="contentbtniniciar">
+                <button type="submit" class="button-loggin" >Reestablecer contraseña
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button><br><br>
             </div>
         </form>
-    </x-jet-authentication-card>
-</x-guest-layout>
+    </div>
+@endsection
+
+@section('js')
+    <script src="{{asset('js/validacion.js')}}"></script>
+@endsection

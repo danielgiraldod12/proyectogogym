@@ -74,7 +74,7 @@
                  <form action=""  >
                     <span>Peso (Kg)</span>
                     <input type="number" name="valorPeso"  id="valorPeso" value="" min="0" max="150"><br>
-                    <span>Altura(MC)</span>
+                    <span>Altura(Cm)</span>
                     <input type="number" name="valorAltura" id="valorAltura" value="" min="0" max="150"><br>
                     <button type="button" onclick="calcular()">Resultado</button>
                     <button type="reset"  onclick="limpiar()">Limpiar</button>
@@ -153,6 +153,5 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/funciones.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.js"></script>
-
 </body>
 </html>

@@ -79,6 +79,10 @@
             @endforeach
         </select>
     </div>
+    <div class="form-group">
+        <label>Contraseña</label>
+        <input class="form-control" type="password" id="password" name="password" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 || event.charCode >=65 && event.charCode <=90 || event.charCode >=97 && event.charCode <=122)">
+    </div>
     <button type="submit" class="btn btn-primary" onclick="return editconf()">ACTUALIZAR</button><br><br>
     <p id="parrafo"></p>
 </form>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Mail\ContactanosMailable;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\StoreContactanos;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -25,13 +26,23 @@ class HomeController extends Controller
 
     public function calendar(){
 
-        $events = Event::query()->first();
-        $title = $events->title;
-        $date = $events->date;
-        $description = $events->description;
-        $state = $events->state;
+//        $events = Event::query()->first();
+//        $title = $events->title;
+//        $date = $events->date;
+//        $description = $events->description;
+//        $state = $events->state;
 
-        return view('calendar' , compact('title','date','description','state'));
+        $events = Event::query()->get()->toArray();
+
+        $titulo = array();
+        $fecha = array();
+
+        foreach($events as $event){
+            array_push($titulo,$event['title']);
+            array_push($fecha,$event['date']);
+        }
+//        dd($titulo,$fecha);
+        return view('calendar' , compact('titulo','fecha'));
     }
 
 }
