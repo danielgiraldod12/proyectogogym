@@ -20,7 +20,7 @@ class HomeController extends Controller
         $correo=new ContactanosMailable($request->all());
 
         Mail::to('sweden@gmail.com')->send($correo);
-
+        //dd($request->ip());
       return redirect()->route('home')->with('info','Mensaje enviado');
     }
 
@@ -32,17 +32,21 @@ class HomeController extends Controller
 //        $description = $events->description;
 //        $state = $events->state;
 
-        $events = Event::query()->get()->toArray();
+        $events = Event::query()->where('state','activo')->get()->toArray();
 
-        $titulo = array();
-        $fecha = array();
+
+        $eventos = array();
+
 
         foreach($events as $event){
-            array_push($titulo,$event['title']);
-            array_push($fecha,$event['date']);
+            $evento = [
+                'title' => $event['title']." | ".$event['description'],
+                'start' => $event['date'],
+            ];
+            array_push($eventos,$evento);
         }
-//        dd($titulo,$fecha);
-        return view('calendar' , compact('titulo','fecha'));
+//       dd($eventos);
+        return view('calendar' , compact('eventos'));
     }
 
 }
