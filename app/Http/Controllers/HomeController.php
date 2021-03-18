@@ -32,7 +32,7 @@ class HomeController extends Controller
 //        $description = $events->description;
 //        $state = $events->state;
 
-        $events = Event::query()->where('state','activo')->get()->toArray();
+        $events = Event::query()->where('state',1)->get()->toArray();
 
 
         $eventos = array();

@@ -29,7 +29,7 @@
                 <br>
                 <br>
                 @enderror
-            </div>  
+            </div>
             <div class="form-group">
                 <label>Descripcion del evento</label>
                 <textarea  class="form-control " type="textarea" id="description" name="description" required cols="10" rows="10">{{old('description',$id->description)}}</textarea>
@@ -39,16 +39,15 @@
                 <br>
                 <br>
                 @enderror
-            </div>  
+            </div>
             <div class="form-group">
                 <label>Estado del evento</label>
                 <!-- Condicional de una linea para que en el select este seleccionada la opcion
                 que el usuario tenga guardada en la bd-->
-                @php($selected = !empty($query->state) )
+                @php($selected =!empty($query->state) ? $query->state : '')
                 <select class="form-control" type="text" id="state" name="state" required>
-                    <option value="{{$id->state}}" {{$selected == $id->state ? 'selected' : ''}} disabled>{{$id->state}}</option>
-                    <option value="Activo" style="font-weight: bold">Activo</option>
-                    <option value="Finalizado" style="font-weight: bold">Finalizado</option>
+                    <option value="1" {{$selected=="1" ? 'selected':''}}>Activo</option>
+                    <option value="2" {{$selected=="2" ? 'selected':''}} style="font-weight: bold">Desactivado</option>
                 </select>
                 <br>
                 @error('state')

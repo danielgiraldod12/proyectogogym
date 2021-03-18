@@ -24,6 +24,7 @@ class EventsController extends Controller
             'events.state', //Estado del evento
         ])
             ->get();
+
         //Le retorno la vista al controlador y le digo que puede usar la variable datatables en la vista con el compact
         return view('event/events', compact('datatablesEvent'));
     }

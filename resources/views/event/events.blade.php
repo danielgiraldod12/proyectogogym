@@ -37,12 +37,17 @@ algun mensaje -->
             </thead>
             <tbody>
             @foreach ($datatablesEvent as $id) <!-- For each para rellenar la tabla eventos -->
+            @if($id->state == 1)
+                @php($stringState = 'Activo')
+            @else
+                @php($stringState = 'Desactivado')
+            @endif
                 <tr>
                     <td>{{$id->id}}</td>
                     <td>{{$id->title}}</td>
                     <td>{{$id->date}}</td>
                     <td>{{$id->description}}</td>
-                    <td>{{$id->state}}</td>
+                    <td>{{$stringState}}</td>
                     <td>
                         <div class="container">
                             @can('editevents')

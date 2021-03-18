@@ -45,8 +45,8 @@
                 <div class="form-group">
                     <label>Estado del evento</label><br>
                     <select name="state" id="state" required>
-                        <option value="Activo">Activo</option>
-                        <option value="Finalizado">Finalizado</option>
+                        <option value="1">Activo</option>
+                        <option value="2">Finalizado</option>
                     </select>
                     <br>
                     @error('state')
