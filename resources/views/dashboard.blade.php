@@ -18,7 +18,7 @@
 <div class="col-lg-3 col-6">
     <div class="small-box bg-primary" style=" top: 5px">
         <div class="inner">
-            <h3><?php echo $NumUsers ?></h3>
+            <h3>{{$NumUsers}}</h3>
             <p>Numero de Usuarios</p>
         </div>
         <div class="icon">
@@ -34,7 +34,7 @@
 <div class="col-lg-3 col-6">
     <div class="small-box bg-success" style="top: 5px">
         <div class="inner">
-            <h3><?php echo $NumFichas ?></h3>
+            <h3>{{$NumFichas}}</h3>
             <p>Numero de Fichas</p>
         </div>
         <div class="icon">
@@ -50,7 +50,7 @@
 <div class="col-lg-3 col-6">
     <div class="small-box bg-white" style="top: 5px">
         <div class="inner">
-            <h3><?php echo $NumEvents ?></h3>
+            <h3>{{$NumEvents}}</h3>
             <p>Eventos Activos</p>
         </div>
         <div class="icon">
@@ -66,30 +66,14 @@
 <div class="col-lg-3 col-6">
     <div class="small-box bg-warning" style="top: 5px">
         <div class="inner">
-            <h3>2</h3>
+            <h3>{{$NumPrograms}}</h3>
             <p>Numero de Programas</p>
         </div>
         <div class="icon">
             <i class="fas fa-school"></i>
         </div>
-        <a class="small-box-footer" href="#">
+        <a class="small-box-footer" href="{{route('programs')}}">
             Tabla Programas
-            <i class="fas fa-arrow-circle-right"></i>
-        </a>
-    </div>
-</div>
-
-<div class="col-lg-3 col-6">
-    <div class="small-box bg-danger" style="top: 5px">
-        <div class="inner">
-            <h3>TOMAR ASISTENCIA</h3>
-            <p>controla la asistencia</p>
-        </div>
-        <div class="icon">
-            <i class="fas fa-school"></i>
-        </div>
-        <a class="small-box-footer" href="#">
-            ir
             <i class="fas fa-arrow-circle-right"></i>
         </a>
     </div>

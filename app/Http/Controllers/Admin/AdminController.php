@@ -54,15 +54,16 @@ class AdminController extends Controller
 
         $NumUsers = User::all()->count(); //Estoy contando todos los registros de la tabla users
         $NumFichas = Record_num::all()->count(); //Estoy contando todos los registros de la tabla fichas
-        $NumEvents = Event::all()->count(); //Estoy contando todos los registros de la tabla eventos
+        $NumEvents = Event::all()->where('state',1)->count(); //Estoy contando todos los registros de la tabla eventos
+        $NumPrograms = Training_program::all()->count(); //Cuento los programas
 
-        return view('dashboard', compact('NumUsers', 'NumFichas', 'NumEvents')); //mostrar numero de usurios,eventos y fichas en la vista dashboard
+        return view('dashboard', compact('NumUsers', 'NumPrograms', 'NumFichas', 'NumEvents')); //mostrar numero de usurios,eventos y fichas en la vista dashboard
     }
 
     public function users(){
 
         //Consulta para tabla usuarios
-        $datatables = User::query() //Creo la variable datatables con el modelo User y el metodo query
+        $users = User::query() //Creo la variable datatables con el modelo User y el metodo query
             ->join('record_nums','record_nums.id', '=', 'users.id_record_num') //Inner join con la tabla ficha
             ->join('training_programs','training_programs.id', '=', 'users.id_training_program') //Inner join con la tabla programa
             ->join('training_centers','training_centers.id', '=', 'users.id_training_center') //Inner join con la tabla centro
@@ -77,8 +78,10 @@ class AdminController extends Controller
                 'training_centers.name_center']) //Centro del usuario con inner join
             ->get();
         //Le retorno la vista al controlador y le digo que puede usar la variable datatables en la vista con el compact
+        $idLog = Auth::user()->id;
 
-        return view('user/users', compact('datatables'));
+        //return datatables()->of($users)->toJson();
+        return view('user/users', compact('users','idLog'));
     }
 
     public function create(){
@@ -181,7 +184,6 @@ class AdminController extends Controller
         $user = Auth::user();
 
         return view("profile")->with("user", $user);
-        //return view('profile'); //Vista perfil
     }
 
     public function updateprofile(Request $request, User $id){

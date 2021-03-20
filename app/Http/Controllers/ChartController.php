@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Asist;
 use Illuminate\Support\Facades\DB;
 
 class ChartController extends Controller
@@ -47,5 +48,23 @@ class ChartController extends Controller
         }
         /* Le paso la vista chart2 y le digo que puede utilizar las variables ficha y cantFicha */
         return view('charts/chart2', compact('ficha','cantFicha'));
+    }
+
+    public function chart3(){
+
+        $asists = Asist::query()
+            ->select([DB::raw("count(record_num) as cantidad"),DB::raw("record_num as ficha")])
+            ->groupBy(DB::raw("record_num"))
+            ->get()->toArray();
+
+        $ficha= array();
+        $cantFicha = array();
+        foreach ($asists as $index => $record)
+        {
+            array_push($ficha,$record['ficha']); //Voy ordenando el array de ficha con el array push
+            array_push($cantFicha,$record['cantidad']); //Voy ordenando el array de Cantficha con el array push
+        }
+        /* Le paso la vista chart2 y le digo que puede utilizar las variables ficha y cantFicha */
+        return view('charts/chart3', compact('ficha','cantFicha'));
     }
 }

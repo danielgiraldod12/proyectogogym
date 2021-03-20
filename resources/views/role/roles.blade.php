@@ -5,15 +5,15 @@
 @section('content')
 
     @if($id == $idLog)
-        <div class="card">
-            <div class="card-header">
-            <h1>No puedes editar tus propios roles!</h1>
-            </div>
-            <div class="card-body">
-                <h3>Si quieres cambiar tu rol, deberias hablar con un Super Administrador!</h3>
-            </div>
+        <div class="alert alert-warning" role="alert">
+            No te recomendamos cambiar tus propios roles!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
-    @else
+    @endif
+
+
         @if(Session::has('message'))
             <div class="alert alert-success" role="alert">
                 {{ Session::get('message') }}
@@ -46,7 +46,7 @@
                 {!! Form::close() !!}
             </div>
         </div>
-        @endif
+
 
 
 @endsection

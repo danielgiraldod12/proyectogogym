@@ -17,6 +17,7 @@ class CreateAsist extends Migration
             $table->id();
             $table->unsignedBigInteger('id_user');
             $table->string('name');
+            $table->integer('record_num');
             $table->string('createdBy');
             $table->timestamps();
 

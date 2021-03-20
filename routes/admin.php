@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Record_NumsController;
 use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\Admin\AsistsController;
+use App\Http\Controllers\Admin\AjaxController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -70,6 +71,8 @@ Route::put('profile/{id}/update', [AdminController::class, 'updateprofile'])->na
 //Graficas usuarios
 Route::get('dashboard/chart1', [ChartController::class, 'chart1'])->middleware('can:chart.first')->name('chart.first');
 Route::get('dashboard/chart2', [ChartController::class, 'chart2'])->middleware('can:chart.second')->name('chart.second');
+Route::get('dashboard/chart3', [ChartController::class, 'chart3'])->middleware('can:chart.third')->name('chart.third');
 
+//Route::get('user/ajax', [AjaxController::class, 'ajaxUser'])->name('ajax.user');
 
 

@@ -370,6 +370,12 @@ return [
                     'can' => 'asistencia',
                     'icon' => 'fas fa-clipboard-list',
                 ],
+                [
+                    'text' => 'Asistencias por Ficha',
+                    'url' => 'dashboard/chart3',
+                    'icon' => 'fas fa-fw fa-chart-bar',
+                    'can'  => 'chart.third',
+                ],
             ]
         ],
 

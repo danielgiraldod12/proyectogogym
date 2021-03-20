@@ -26,14 +26,7 @@ class HomeController extends Controller
 
     public function calendar(){
 
-//        $events = Event::query()->first();
-//        $title = $events->title;
-//        $date = $events->date;
-//        $description = $events->description;
-//        $state = $events->state;
-
         $events = Event::query()->where('state',1)->get()->toArray();
-
 
         $eventos = array();
 

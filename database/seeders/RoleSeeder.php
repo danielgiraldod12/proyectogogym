@@ -63,5 +63,6 @@ class RoleSeeder extends Seeder
 
         Permission::create(['name' => 'chart.first'])->syncRoles([$role1,$role2,$role3]);
         Permission::create(['name' => 'chart.second'])->syncRoles([$role1,$role2,$role3]);
+        Permission::create(['name' => 'chart.third'])->syncRoles([$role1,$role2,$role3]);
     }
 }

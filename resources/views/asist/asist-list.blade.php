@@ -16,12 +16,13 @@
             <table class="table table-striped" id="asistencia">
                 <thead>
                         <tr>
-                           <th scope="col">Id</th>
-                           <th scope="col">Nombre del Usuario</th>
-                           <th scope="col">Id del Usuario</th>
-                           <th scope="col">Creado por</th>
-                           <th scope="col">Fecha</th>
-                           <th scope="col">Acciones</th>
+                            <th scope="col">Id</th>
+                            <th scope="col">Nombre del Usuario</th>
+                            <th scope="col">Id del Usuario</th>
+                            <th scope="col">Ficha del Usuario</th>
+                            <th scope="col">Creado por</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Acciones</th>
                        </tr>
                     </thead>
                         <tbody>
@@ -30,6 +31,7 @@
                             <td>{{$asist->id}}</td>
                             <td>{{$asist->name}}</td>
                             <td>{{$asist->id_user}}</td>
+                            <td>{{$asist->record_num}}</td>
                             <td>{{$asist->createdBy}}</td>
                             <td>{{$asist->created_at}}</td>
                             <td>
