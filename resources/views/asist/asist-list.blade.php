@@ -10,47 +10,30 @@
 @endsection
 
 @section('content')
-<div class="card">
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-striped" id="asistencia">
-                <thead>
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Nombre del Usuario</th>
-                            <th scope="col">Id del Usuario</th>
-                            <th scope="col">Ficha del Usuario</th>
-                            <th scope="col">Creado por</th>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Acciones</th>
-                       </tr>
+    @routes
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped" id="asistencia">
+                    <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nombre del Usuario</th>
+                        <th scope="col">Id del Usuario</th>
+                        <th scope="col">Ficha del Usuario</th>
+                        <th scope="col">Creado por</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
                     </thead>
-                        <tbody>
-                        @foreach($asists as $asist)
-                            <tr>
-                            <td>{{$asist->id}}</td>
-                            <td>{{$asist->name}}</td>
-                            <td>{{$asist->id_user}}</td>
-                            <td>{{$asist->record_num}}</td>
-                            <td>{{$asist->createdBy}}</td>
-                            <td>{{$asist->created_at}}</td>
-                            <td>
-                                <form action="{{route('destroyasistencia', $asist)}}" method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <button onclick="return deleteconf()" class="btn"><i class="fa fa-trash-alt"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-            </table>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 @endsection
 <!-- CDNs y Script de datatables.net -->
 @section('js')
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script>
@@ -65,9 +48,24 @@
     <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.colVis.min.js"></script>
     <script src="{{asset('js/datatables.js')}}"></script>
+    <script src="{{asset('js/ajax/confirmations.js')}}"></script>
     <script>
-        $(document).ready(function() {
-            $('#asistencia').DataTable( {
+        $(document).ready(function () {
+            window['table'] = $('#asistencia').DataTable({
+                'ajax':'{{route('ajax.asist')}}',
+                'columns': [
+                    {data: 'id'},
+                    {data: 'id_user'},
+                    {data: 'name'},
+                    {data: 'record_num'},
+                    {data: 'createdBy'},
+                    {data: 'created_at'},
+                    {
+                        data(data){
+                            return `@can('destroyAsistencia')<button onclick="return deleteAsist(${data.id})" class="btn"><i class="fa fa-trash-alt"></i></button>@endcan`;
+                    }
+                    }
+                ],
                 responsive: true,
                 fixedColumns: true,
                 autowidth: false,

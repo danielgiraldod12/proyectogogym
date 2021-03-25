@@ -61,6 +61,12 @@ class RoleSeeder extends Seeder
 
         Permission::create(['name' => 'dashboard.profile'])->syncRoles([$role1,$role2,$role3]);
 
+        Permission::create(['name' => 'ajax.user'])->syncRoles([$role1,$role2,$role3]);
+        Permission::create(['name' => 'ajax.record_num'])->syncRoles([$role1,$role2,$role3]);
+        Permission::create(['name' => 'ajax.asist'])->syncRoles([$role1,$role2,$role3]);
+        Permission::create(['name' => 'ajax.event'])->syncRoles([$role1,$role2,$role3]);
+        Permission::create(['name' => 'ajax.program'])->syncRoles([$role1,$role2,$role3]);
+
         Permission::create(['name' => 'chart.first'])->syncRoles([$role1,$role2,$role3]);
         Permission::create(['name' => 'chart.second'])->syncRoles([$role1,$role2,$role3]);
         Permission::create(['name' => 'chart.third'])->syncRoles([$role1,$role2,$role3]);

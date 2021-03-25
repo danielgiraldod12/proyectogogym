@@ -34,7 +34,7 @@ Route::delete('users/delete/{id}', [AdminController::class, 'destroy'])->middlew
 Route::get('record_nums', [Record_NumsController::class, 'record_num'])->middleware('can:record_num')->name('record_num');
 Route::get('record_nums/creatern', [Record_NumsController::class, 'creatern'])->middleware('can:creatern')->name('creatern');
 Route::post('crearrn', [Record_NumsController::class, 'crearrn'])->middleware('can:crearrn')->name('crearrn');
-Route::get('record_nums/{id}/edit', [Record_NumsController::class, 'editrn'])->middleware('can:editrn')->name('editrn');
+Route::get('record_nums/edit/{id}', [Record_NumsController::class, 'editrn'])->middleware('can:editrn')->name('editrn');
 Route::put('record_nums/{id}', [Record_NumsController::class, 'updatern'])->middleware('can:updatern')->name('updatern');
 Route::delete('record_nums/{id}/delete', [Record_NumsController::class, 'destroyrn'])->middleware('can:destroyrn')->name('destroyrn');
 
@@ -42,7 +42,7 @@ Route::delete('record_nums/{id}/delete', [Record_NumsController::class, 'destroy
 Route::get('programs', [ProgramsController::class, 'programs'])->middleware('can:programs')->name('programs');
 Route::get('programs/createprogram', [ProgramsController::class, 'createprog'])->middleware('can:createprog')->name('createprog');
 Route::post('crearprogram', [ProgramsController::class, 'crearprog'])->middleware('can:crearprog')->name('crearprog');
-Route::get('programs/{id}/edit', [ProgramsController::class, 'editprog'])->middleware('can:editprog')->name('editprog');
+Route::get('programs/edit/{id}', [ProgramsController::class, 'editprog'])->middleware('can:editprog')->name('editprog');
 Route::put('programs/{id}', [ProgramsController::class, 'updateprog'])->middleware('can:updateprog')->name('updateprog');
 Route::delete('programs/{id}/delete', [ProgramsController::class, 'destroyprog'])->middleware('can:destroyprog')->name('destroyprog');
 
@@ -50,7 +50,7 @@ Route::delete('programs/{id}/delete', [ProgramsController::class, 'destroyprog']
 Route::get('events', [EventsController::class, 'events'])->middleware('can:events')->name('events'); //vista donde visualizare los eventos
 Route::get('events/createevents', [EventsController::class, 'createevents'])->middleware('can:createevents')->name('createevents'); //vista para ir al formulario de crear eventos
 Route::post('crearevents', [EventsController::class, 'crearevents'])->middleware('can:crearevents')->name('crearevents'); // le paso la funcion de crear eventos
-Route::get('events/{id}/edit', [EventsController::class, 'editevents'])->middleware('can:editevents')->name('editevents'); //vista paar editar los eventos
+Route::get('events/edit/{id}', [EventsController::class, 'editevents'])->middleware('can:editevents')->name('editevents'); //vista paar editar los eventos
 Route::put('events/{id}', [EventsController::class, 'updateevents'])->middleware('can:updateevents')->name('updateevents');//ruta pra actualizar los eventos
 Route::delete('events/{id}/delete', [EventsController::class, 'destroyevents'])->middleware('can:destroyevents')->name('destroyevents');
 
@@ -73,6 +73,8 @@ Route::get('dashboard/chart1', [ChartController::class, 'chart1'])->middleware('
 Route::get('dashboard/chart2', [ChartController::class, 'chart2'])->middleware('can:chart.second')->name('chart.second');
 Route::get('dashboard/chart3', [ChartController::class, 'chart3'])->middleware('can:chart.third')->name('chart.third');
 
-Route::get('user/ajax', [AjaxController::class, 'ajaxUser'])->name('ajax.user');
-
-
+Route::get('user/ajax', [AjaxController::class, 'ajaxUser'])->middleware('can:ajax.user')->name('ajax.user');
+Route::get('asist/ajax', [AjaxController::class, 'ajaxAsist'])->middleware('can:ajax.asist')->name('ajax.asist');
+Route::get('record_nums/ajax', [AjaxController::class, 'ajaxRecordnum'])->middleware('can:ajax.record_num')->name('ajax.record_num');
+Route::get('events/ajax', [AjaxController::class, 'ajaxEvent'])->middleware('can:ajax.event')->name('ajax.event');
+Route::get('programs/ajax', [AjaxController::class, 'ajaxProgram'])->middleware('can:ajax.program')->name('ajax.program');

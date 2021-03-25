@@ -12,9 +12,8 @@ use App\Models\Record_num;
 class AsistsController extends Controller
 {
     public function asistencia(){
-        $asists = Asist::all();
 
-        return view('asist.asist-list', compact('asists'));
+        return view('asist.asist-list');
     }
 
     public function createasistencia(User $id){
@@ -35,8 +34,13 @@ class AsistsController extends Controller
 
     public function destroyasistencia(Asist $id){
 
-        $id->delete();
+        if($id){
+            $id->delete();
+            return response()->json($id->delete());
+        }else{
+            return response()->json(false);
+        }
 
-        return redirect()->route('asistencia')->with('message','Asistencia eliminada correctamente!');
+        //return redirect()->route('asistencia')->with('message','Asistencia eliminada correctamente!');
     }
 }

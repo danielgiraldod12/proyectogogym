@@ -10,6 +10,7 @@
 @endsection
 
 @section('content')
+    @routes
     <!-- Condicional para que me muestre los alerts en caso de que el controlador le mande
 algun mensaje -->
     @if(Session::has('message'))
@@ -32,33 +33,6 @@ algun mensaje -->
                         <th scope="col">Acciones: </th>
                     </tr>
                     </thead>
-                    <tbody>
-                    @foreach ($datatablesProgram as $id) <!-- For each para rellenar la tabla programas -->
-                    <tr>
-                        <td>{{$id->id}}</td>
-                        <td>{{$id->name_program}}</td>
-                        <td>
-                            <div class="container">
-                            @can('editprog')
-                                <!-- Boton con la ruta para editar y con la variable id -->
-                                    <button class="btn"><a href="{{route('editprog', $id->id)}}"><i class="fa fa-user-edit"></i></a></button>
-                            @endcan
-
-                            @can('destroyprog')
-                                <!-- Boton con la ruta destroy y la variable id, solo que en esta ocasion
-                                es necesario crearlo dentro de un nuevo form para asi poderle pasar el
-                                metodo delete-->
-                                    <form action="{{route('destroyprog', $id)}}" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button onclick="return deleteconf()" class="btn"><i class="fa fa-trash-alt"></i></button>
-                                    </form>
-                                @endcan
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                    </tbody>
                 </table>
             </div>
         </div>
@@ -66,6 +40,7 @@ algun mensaje -->
 @endsection
 <!-- CDNs y Script de datatables.net -->
 @section('js')
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script>
@@ -80,9 +55,22 @@ algun mensaje -->
     <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.colVis.min.js"></script>
     <script src="{{asset('js/datatables.js')}}"></script>
+    <script src="{{asset('js/ajax/confirmations.js')}}"></script>
     <script>
         $(document).ready(function() {
-            $('#programs').DataTable( {
+           window['table'] = $('#programs').DataTable( {
+                "ajax": "{{route('ajax.program')}}",
+                "columns" : [
+                    {data: 'id'},
+                    {data: 'name_program'},
+                    {
+                        data(data){
+                            return `@can('editprog')<button class="btn"><a href="{{route('editprog', "")}}/${data.id}"><i style="color: black;" class="fa fa-user-edit"></i></a></button>@endcan
+                            @can('destroyprog')<button onclick="return deleteProgram(${data.id})" class="btn"><i class="fa fa-trash-alt"></i></button>@endcan
+                            `;
+                        }
+                    }
+                ],
                 responsive: true,
                 fixedColumns: true,
                 autowidth: false,

@@ -37,7 +37,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678')
         ]);
 
-        User::factory(50)->create();
+        User::factory(150)->create();
 
     }
 }

@@ -14,12 +14,8 @@ class ProgramsController extends Controller
 {
     public function programs(){
 
-        //Consulta para tabla eventos
-        $datatablesProgram = Training_program::all(); //Creo la variable datatables con el modelo event y el metodo query
-
-
         //Le retorno la vista al controlador y le digo que puede usar la variable datatables en la vista con el compact
-        return view('program/program-list', compact('datatablesProgram'));
+        return view('program/program-list');
     }
 
     public function createprog(){
@@ -87,8 +83,14 @@ class ProgramsController extends Controller
     }
 
     public function destroyprog(Training_program $id){
-        $id->delete(); //Le digo que elimine un registro utilizando la variable id y el metodo delete
+        if($id){
+            $id->delete(); //Le digo que elimine un registro utilizando la variable id y el metodo delete
+            return response()->json($id->delete());
+        }else{
+            return response()->json(false);
+        }
+
         /* Le digo que me redireccione a la vista de datatables con un mensaje */
-        return redirect()->route('programs' , $id)->with('message','¡Eliminación de programa satisfactorio!');
+        //return redirect()->route('programs' , $id)->with('message','¡Eliminación de programa satisfactorio!');
     }
 }

@@ -61,7 +61,7 @@ algun mensaje -->
         <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.colVis.min.js"></script>
         <script src="{{asset('js/datatables.js')}}"></script>
-        <script src="{{asset('js/ajax/User.js')}}"></script>
+        <script src="{{asset('js/ajax/confirmations.js')}}"></script>
         <script>
         $(document).ready(function() {
         window['table'] = $('#usuarios').DataTable( {
@@ -80,7 +80,7 @@ algun mensaje -->
                         return `
                         @can('edit')<button class='btn'><a href='{{route('edit', "")}}/${data.id}'><i style='color: black;' class='fa fa-user-edit'></i></a></button>@endcan
                         @can('destroy')<button onclick="return deleteUser(${data.id})" class="btn"><i class="fa fa-trash-alt"></i></button>@endcan
-                        <button class="btn"><a href="{{route('dompdfuser', "")}}/${data.id}"><i style="color: black" class="fa fa-download"></i></a></button>
+                        @can('dompdfuser')<button class="btn"><a href="{{route('dompdfuser', "")}}/${data.id}"><i style="color: black" class="fa fa-download"></i></a></button>@endcan
                         @can('createasistencia')<button onclick="return asistUser(${data.id})" class="btn"><i style="color: black" class="fa fa-book"></i></button>@endcan
                         `;
                     }

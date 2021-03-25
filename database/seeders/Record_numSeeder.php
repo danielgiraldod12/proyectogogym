@@ -26,5 +26,11 @@ class Record_numSeeder extends Seeder
         $Record_num2->record_num = "2061277";
         $Record_num2->id_training_program = "1";
         $Record_num2->save();
+
+        $Record_num3 = new Record_num();
+
+        $Record_num3->record_num = "2061214";
+        $Record_num3->id_training_program = "2";
+        $Record_num3->save();
     }
 }

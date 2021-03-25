@@ -14,19 +14,8 @@ class EventsController extends Controller
 
     public function events(){
 
-        //Consulta para tabla eventos
-        $datatablesEvent = Event::query() //Creo la variable datatables con el modelo event y el metodo query
-        ->select([ //Selecciono
-            'events.id', //Id de evento
-            'events.title', //Titulo evento
-            'events.date', //Fecha del evento
-            'events.description', //Descripcion de evento
-            'events.state', //Estado del evento
-        ])
-            ->get();
-
         //Le retorno la vista al controlador y le digo que puede usar la variable datatables en la vista con el compact
-        return view('event/events', compact('datatablesEvent'));
+        return view('event/events');
     }
 
     public function createevents(){
@@ -75,8 +64,14 @@ class EventsController extends Controller
     }
 
     public function destroyevents(Event $id){
-        $id->delete(); //Le digo que elimine un registro utilizando la variable id y el metodo delete
+        if($id){
+            $id->delete(); //Le digo que elimine un registro utilizando la variable id y el metodo delete
+            return response()->json($id->delete());
+        }else{
+            return response()->json(false);
+        }
+
         /* Le digo que me redireccione a la vista de datatables con un mensaje */
-        return redirect()->route('events' , $id)->with('message','¡Eliminación de evento satisfactorio!');
+        //return redirect()->route('events' , $id)->with('message','¡Eliminación de evento satisfactorio!');
     }
 }

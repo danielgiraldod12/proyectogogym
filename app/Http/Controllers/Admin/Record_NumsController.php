@@ -14,17 +14,9 @@ class Record_NumsController extends Controller
 
     public function record_num(){
 
-        //Consulta para tabla usuarios
-        $datatablesRecord = Record_num::query() //Creo la variable datatables con el modelo User y el metodo query
-        ->join('training_programs','training_programs.id', '=', 'record_nums.id_training_program') //Inner join con la tabla programa
-        ->select([ //Selecciono
-            'record_nums.id', //Id de ficha
-            'record_nums.record_num', //Nombre ficha
-            'training_programs.name_program' //Programa de la ficha con inner join
-        ])
-            ->get();
+
         //Le retorno la vista al controlador y le digo que puede usar la variable datatables en la vista con el compact
-        return view('record_num/record_nums', compact('datatablesRecord'));
+        return view('record_num/record_nums');
     }
 
     public function creatern(){
@@ -100,8 +92,14 @@ class Record_NumsController extends Controller
     }
 
     public function destroyrn(Record_num $id){
-        $id->delete(); //Le digo que elimine un registro utilizando la variable id y el metodo delete
+        if($id){
+            $id->delete();
+            return response()->json($id->delete());
+        }else{
+            return response()->json(false);
+        }
+         //Le digo que elimine un registro utilizando la variable id y el metodo delete
         /* Le digo que me redireccione a la vista de datatables con un mensaje */
-        return redirect()->route('record_num' , $id)->with('message','¡Eliminación de ficha satisfactoria!');
+        //return redirect()->route('record_num' , $id)->with('message','¡Eliminación de ficha satisfactoria!');
     }
 }
