@@ -44,7 +44,6 @@ algun mensaje -->
                                 <!-- Boton con la ruta para editar y con la variable id -->
                                 <button class="btn"><a href="{{route('editroles', $user)}}"><i class="fa fa-user-edit"></i></a></button>
                             </div>
-                        </form>
                         </td>
                     </tr>
                 @endforeach

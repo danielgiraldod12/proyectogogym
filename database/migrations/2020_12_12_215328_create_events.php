@@ -18,7 +18,7 @@ class CreateEvents extends Migration
             $table->string('title');
             $table->date('date');
             $table->text('description');
-            $table->integer('state');
+            $table->string('state');
             $table->unsignedBigInteger('id_user')->nullable();
             $table->timestamps();
 

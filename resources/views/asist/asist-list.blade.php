@@ -62,7 +62,7 @@
                     {data: 'created_at'},
                     {
                         data(data){
-                            return `@can('destroyAsistencia')<button onclick="return deleteAsist(${data.id})" class="btn"><i class="fa fa-trash-alt"></i></button>@endcan`;
+                            return `@can('destroyasistencia')<button onclick="return deleteAsist(${data.id})" class="btn"><i class="fa fa-trash-alt"></i></button>@endcan`;
                     }
                     }
                 ],

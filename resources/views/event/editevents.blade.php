@@ -46,8 +46,8 @@
                 que el usuario tenga guardada en la bd-->
                 @php($selected =!empty($query->state) ? $query->state : '')
                 <select class="form-control" type="text" id="state" name="state" required>
-                    <option value="1" {{$selected=="1" ? 'selected':''}}>Activo</option>
-                    <option value="2" {{$selected=="2" ? 'selected':''}} style="font-weight: bold">Desactivado</option>
+                    <option value="Activo" {{$selected=="1" ? 'selected':''}}>Activo</option>
+                    <option value="Desactivado" {{$selected=="2" ? 'selected':''}} style="font-weight: bold">Desactivado</option>
                 </select>
                 <br>
                 @error('state')

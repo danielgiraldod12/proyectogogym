@@ -60,9 +60,12 @@ algun mensaje -->
     <script src="{{asset('js/datatables.js')}}"></script>
     <script src="{{asset('js/ajax/confirmations.js')}}"></script>
     <script>
+
+
         $(document).ready(function() {
             window['table'] = $('#events').DataTable( {
                 "ajax" : '{{route('ajax.event')}}',
+
                 "columns" : [
                     {data: 'id'},
                     {data: 'title'},
@@ -70,8 +73,10 @@ algun mensaje -->
                     {data: 'description'},
                     {data: 'state'},
                     {
+
                         data(data){
-                            return `@can('editevents')<button class="btn"><a href="{{route('editevents', "")}}/${data.id}"><i class="fa fa-user-edit"></i></a></button>@endcan
+
+                            return `@can('editevents')<button class="btn"><a href="{{route('editevents', "")}}/${data.id}"><i style="color: black;" class="fa fa-user-edit"></i></a></button>@endcan
                             @can('destroyevents')<button onclick="return deleteEvent(${data.id})" class="btn"><i class="fa fa-trash-alt"></i></button>@endcan
                             `;
                         }
@@ -88,6 +93,7 @@ algun mensaje -->
                 ]
             });
         });
+
     </script>
 @endsection
 

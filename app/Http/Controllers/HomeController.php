@@ -26,7 +26,7 @@ class HomeController extends Controller
 
     public function calendar(){
 
-        $events = Event::query()->where('state',1)->get()->toArray();
+        $events = Event::query()->where('state','Activo')->get()->toArray();
 
         $eventos = array();
 
