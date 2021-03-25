@@ -26,9 +26,9 @@ Route::get('dompdf/{id}', [AdminController::class, 'dompdfuser'])->middleware('c
 Route::get('users', [AdminController::class, 'users'])->middleware('can:users')->name('users');
 Route::get('users/create', [AdminController::class, 'create'])->middleware('can:create')->name('create');
 Route::post('crear', [AdminController::class, 'crear'])->middleware('can:crear')->name('crear');
-Route::get('users/{id}/edit', [AdminController::class, 'edit'])->middleware('can:edit')->name('edit');
+Route::get('users/edit/{id}', [AdminController::class, 'edit'])->middleware('can:edit')->name('edit');
 Route::put('users/{id}', [AdminController::class, 'update'])->middleware('can:update')->name('update');
-Route::delete('users/{id}/delete', [AdminController::class, 'destroy'])->middleware('can:destroy')->name('destroy');
+Route::delete('users/delete/{id}', [AdminController::class, 'destroy'])->middleware('can:destroy')->name('destroy');
 
 //CRUD Fichas
 Route::get('record_nums', [Record_NumsController::class, 'record_num'])->middleware('can:record_num')->name('record_num');
@@ -73,6 +73,6 @@ Route::get('dashboard/chart1', [ChartController::class, 'chart1'])->middleware('
 Route::get('dashboard/chart2', [ChartController::class, 'chart2'])->middleware('can:chart.second')->name('chart.second');
 Route::get('dashboard/chart3', [ChartController::class, 'chart3'])->middleware('can:chart.third')->name('chart.third');
 
-//Route::get('user/ajax', [AjaxController::class, 'ajaxUser'])->name('ajax.user');
+Route::get('user/ajax', [AjaxController::class, 'ajaxUser'])->name('ajax.user');
 
 

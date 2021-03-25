@@ -7,7 +7,7 @@
     <div class="card w-50">
         <div class="card-body">
             <h1>Editar Eventos</h1>
-            <form method="POST" action="{{ route('updateevents', $id) }}">
+            <form id="form" onsubmit="editconf(event)"  method="POST" action="{{ route('updateevents', $id) }}">
             @csrf
             @method('put')
             <div class="form-group">
@@ -56,7 +56,7 @@
                 <br>
                 @enderror
             </div>
-            <button type="submit" class="btn btn-primary" onclick="return editconf()">ACTUALIZAR</button><br><br>
+            <button type="submit" class="btn btn-primary">ACTUALIZAR</button><br><br>
             <p id="parrafo"></p>
             </form>
         </div>
@@ -66,5 +66,7 @@
 @endsection
 
 @section('js')
-<script src="{{asset('js/datatables.js')}}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="{{asset('js/datatables.js')}}"></script>
 @endsection

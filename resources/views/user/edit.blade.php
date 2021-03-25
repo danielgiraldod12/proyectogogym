@@ -3,6 +3,7 @@
 @section('title', 'Datatables - Edit')
 
 @section('content')
+@routes
 @if(Session::has('message'))
     <div class="alert alert-danger" role="alert">
         {{ Session::get('message') }}
@@ -15,7 +16,7 @@
     <div class="card w-50">
     <div class="card-body">
     <h1>Editar Usuario</h1>
-    <form method="POST" action="{{ route('update', $id) }}">
+    <form id="form" onsubmit="editconf(event)" method="POST" action="{{ route('update', $id) }}" >
     @csrf
     @method('put')
     <div class="form-group">
@@ -83,7 +84,7 @@
         <label>Contraseña</label>
         <input class="form-control" type="password" id="password" name="password" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 || event.charCode >=65 && event.charCode <=90 || event.charCode >=97 && event.charCode <=122)">
     </div>
-    <button type="submit" class="btn btn-primary" onclick="return editconf()">ACTUALIZAR</button><br><br>
+    <button type="submit" class="btn btn-primary">ACTUALIZAR</button><br><br>
     <p id="parrafo"></p>
 </form>
 </div>
@@ -91,5 +92,7 @@
 @endsection
 
 @section('js')
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="{{asset('js/datatables.js')}}"></script>
 @endsection

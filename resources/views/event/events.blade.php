@@ -39,8 +39,10 @@ algun mensaje -->
             @foreach ($datatablesEvent as $id) <!-- For each para rellenar la tabla eventos -->
             @if($id->state == 1)
                 @php($stringState = 'Activo')
-            @else
+            @elseif($id->state == 2)
                 @php($stringState = 'Desactivado')
+            @else
+                @php($stringState = 'Estado desconocido')
             @endif
                 <tr>
                     <td>{{$id->id}}</td>

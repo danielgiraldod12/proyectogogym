@@ -23,7 +23,8 @@
         "livewire/livewire": "^2.0",
         "nesbot/carbon": "^2.46",
         "spatie/laravel-permission": "^4.0",
-        "yajra/laravel-datatables-oracle": "^9.15"
+        "tightenco/ziggy": "^1.0",
+        "yajra/laravel-datatables-oracle": "^9.17"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

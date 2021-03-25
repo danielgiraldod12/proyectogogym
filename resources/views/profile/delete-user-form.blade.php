@@ -31,7 +31,7 @@
                     <x-jet-input type="password" class="mt-1 block w-3/4" placeholder="{{ __('Password') }}"
                                 x-ref="password"
                                 wire:model.defer="password"
-                                wire:keydown.enter="deleteUser" />
+                                wire:keydown.enter="user" />
 
                     <x-jet-input-error for="password" class="mt-2" />
                 </div>
@@ -42,7 +42,7 @@
                     {{ __('Nevermind') }}
                 </x-jet-secondary-button>
 
-                <x-jet-danger-button class="ml-2" wire:click="deleteUser" wire:loading.attr="disabled">
+                <x-jet-danger-button class="ml-2" wire:click="user" wire:loading.attr="disabled">
                     {{ __('Delete Account') }}
                 </x-jet-danger-button>
             </x-slot>

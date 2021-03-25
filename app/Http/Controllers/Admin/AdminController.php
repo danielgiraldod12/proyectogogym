@@ -47,7 +47,6 @@ class AdminController extends Controller
 
         return $pdf->download('user-list.pdf');
 
-      //return view('pdf.userpdf');
     }
 
     public function dashboard(){
@@ -62,26 +61,10 @@ class AdminController extends Controller
 
     public function users(){
 
-        //Consulta para tabla usuarios
-        $users = User::query() //Creo la variable datatables con el modelo User y el metodo query
-            ->join('record_nums','record_nums.id', '=', 'users.id_record_num') //Inner join con la tabla ficha
-            ->join('training_programs','training_programs.id', '=', 'users.id_training_program') //Inner join con la tabla programa
-            ->join('training_centers','training_centers.id', '=', 'users.id_training_center') //Inner join con la tabla centro
-            ->select([ //Selecciono
-                'users.id', //Id de Usuario
-                'users.typeOfIdentification', //Tipo de Doc
-                'users.identification_num', //Num de Doc
-                'users.name', //Nombre usuario
-                'users.email', //Email usuario
-                'record_nums.record_num', //Ficha del usuario con inner join
-                'training_programs.name_program', //Programa del usuario con inner join
-                'training_centers.name_center']) //Centro del usuario con inner join
-            ->get();
-        //Le retorno la vista al controlador y le digo que puede usar la variable datatables en la vista con el compact
-        $idLog = Auth::user()->id;
+//        $idLog = Auth::user()->id;
 
         //return datatables()->of($users)->toJson();
-        return view('user/users', compact('users','idLog'));
+        return view('user/users');
     }
 
     public function create(){
@@ -142,8 +125,7 @@ class AdminController extends Controller
     }
 
     public function update(Request $request, User $id){
-        /* Le digo que utilice el request para que llame la informacion de los
-        inputs de la vista edit y actualice el registro correspondiente */
+
         $id->name = $request->name;
         $id->email = $request->email;
         $id->typeOfIdentification = $request->typeOfIdentification;
@@ -166,18 +148,30 @@ class AdminController extends Controller
 
         if (!$error) {
             /* Le digo que me redireccione a la vista de datatables con un mensaje */
+
             return redirect()->route('users' , $id)->with('message','¡Actualizacion de usuario satisfactoria!');
         } else {
             //$request->session()->flash('danger', $message ? $message : 'Error inesperado al intentar almacenar el usuario.');
             return redirect()->route('edit' , $id)->with('message', $message);
         }
 
+        /* Le digo que utilice el request para que llame la informacion de los
+        inputs de la vista edit y actualice el registro correspondiente */
+
+
     }
 
     public function destroy(User $id){
-        $id->delete(); //Le digo que elimine un registro utilizando la variable id y el metodo delete
+
+        if($id){
+            $id->delete(); //Le digo que elimine un registro utilizando la variable id y el metodo delete
+            return response()->json($id->delete());
+        }else{
+            return response()->json(false);
+        }
+
         /* Le digo que me redireccione a la vista de datatables con un mensaje */
-        return redirect()->route('users' , $id)->with('message','¡Eliminación de usuario satisfactoria!');
+        //return redirect()->route('users' , $id)->with('message','¡Eliminación de usuario satisfactoria!');
     }
 
     public function profile(){

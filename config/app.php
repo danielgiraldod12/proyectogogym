@@ -139,7 +139,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
-        
+
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -180,7 +180,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-
+        Yajra\DataTables\DataTablesServiceProvider::class,
     ],
 
     /*
@@ -235,7 +235,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Form' => Collective\Html\FormFacde::class,
         'Html' => Collective\Html\HtmlFacde::class,
-
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
     ],
 
 ];
