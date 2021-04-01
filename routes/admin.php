@@ -73,6 +73,7 @@ Route::get('dashboard/chart1', [ChartController::class, 'chart1'])->middleware('
 Route::get('dashboard/chart2', [ChartController::class, 'chart2'])->middleware('can:chart.second')->name('chart.second');
 Route::get('dashboard/chart3', [ChartController::class, 'chart3'])->middleware('can:chart.third')->name('chart.third');
 
+//Ajax
 Route::get('user/ajax', [AjaxController::class, 'ajaxUser'])->middleware('can:ajax.user')->name('ajax.user');
 Route::get('asist/ajax', [AjaxController::class, 'ajaxAsist'])->middleware('can:ajax.asist')->name('ajax.asist');
 Route::get('record_nums/ajax', [AjaxController::class, 'ajaxRecordnum'])->middleware('can:ajax.record_num')->name('ajax.record_num');

@@ -10,7 +10,6 @@ function deleteUser(id) {
         confirmButtonText: 'Si, eliminalo!'
     }).then((result) => {
         if (result.isConfirmed) {
-
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

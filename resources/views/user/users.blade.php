@@ -39,6 +39,54 @@ algun mensaje -->
                     <th scope="col">Acciones: </th>
                 </tr>
             </thead>
+
+
+                <tbody>
+{{--                @foreach ($users as $user) <!-- For each para rellenar la tabla usuarios -->--}}
+{{--                <tr>--}}
+{{--                    <td>{{$user->id}}</td>--}}
+{{--                    <td>{{$user->name}}</td>--}}
+{{--                    <td>{{$user->email}}</td>--}}
+{{--                    <td>{{$user->typeOfIdentification}}</td>--}}
+{{--                    <td>{{$user->identification_num}}</td>--}}
+{{--                    <td>{{$user->record_num}}</td>--}}
+{{--                    <td>{{$user->name_program}}</td>--}}
+{{--                    <td>{{$user->name_center}}</td>--}}
+{{--                    <td>--}}
+{{--                        <div class="container">--}}
+{{--                            <div class="row">--}}
+{{--                                <!-- Boton con la ruta para editar y con la variable id -->--}}
+{{--                                @can('edit')--}}
+{{--                                    <button class="btn"><a href="{{route('edit', $user->id)}}"><i style="color: black;" class="fa fa-user-edit"></i></a></button>--}}
+{{--                                @endcan--}}
+{{--                            <!-- Boton con la ruta destroy y la variable id, solo que en esta ocasion--}}
+{{--                                    es necesario crearlo dentro de un nuevo form para asi poderle pasar el--}}
+{{--                                    metodo delete-->--}}
+{{--                                @if($user->id == $idLog)--}}
+{{--                                @else--}}
+{{--                                    @can('destroy')--}}
+{{--                                        <form action="{{route('destroy', $user)}}" method="POST">--}}
+{{--                                            @csrf--}}
+{{--                                            @method('delete')--}}
+{{--                                            <button onclick="return deleteconf()" class="btn"><i class="fa fa-trash-alt"></i></button>--}}
+{{--                                        </form>--}}
+{{--                                    @endcan--}}
+{{--                                @endif--}}
+{{--                                <button class="btn"><a href="{{route('dompdfuser', $user->id)}}"><i style="color: black" class="fa fa-download"></i></a></button>--}}
+{{--                                @can('createasistencia')--}}
+{{--                                    <form action="{{route('createasistencia', $user)}}" method="POST">--}}
+{{--                                        @csrf--}}
+{{--                                        <button onclick="return asistconf()" class="btn"><i style="color: black" class="fa fa-book"></i></button>--}}
+{{--                                    </form>--}}
+{{--                                @endcan--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </td>--}}
+{{--                </tr>--}}
+{{--                @endforeach--}}
+                </tbody>
+
+
             </table>
         </div>
     </div>
@@ -62,9 +110,30 @@ algun mensaje -->
         <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.colVis.min.js"></script>
         <script src="{{asset('js/datatables.js')}}"></script>
         <script src="{{asset('js/ajax/confirmations.js')}}"></script>
+{{--        <script>--}}
+{{--            $(document).ready(function() {--}}
+{{--                $('#usuarios').DataTable( {--}}
+{{--                    responsive: true,--}}
+{{--                    fixedColumns: true,--}}
+{{--                    autowidth: false,--}}
+{{--                    language:--}}
+{{--                        {url: 'i18n/datatables-spanish.json'},--}}
+{{--                    dom: 'Bfrtip',--}}
+{{--                    buttons: [--}}
+{{--                        'copy', 'csv', 'excel', 'pdf', 'print'--}}
+{{--                    ]--}}
+{{--                });--}}
+{{--            });--}}
+{{--        </script>--}}
+
+
         <script>
         $(document).ready(function() {
         window['table'] = $('#usuarios').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
             'ajax':'{{route('ajax.user')}}',
             'columns': [
                 {data: 'id'},
@@ -91,10 +160,7 @@ algun mensaje -->
             autowidth: false,
             language:
                 {url: 'i18n/datatables-spanish.json'},
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
+
     });
 
 
