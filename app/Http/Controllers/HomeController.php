@@ -29,8 +29,7 @@ class HomeController extends Controller
         $events = Event::query()->where('state','Activo')->get()->toArray();
 
         $eventos = array();
-
-
+        
         foreach($events as $event){
             $evento = [
                 'title' => $event['title']." | ".$event['description'],
