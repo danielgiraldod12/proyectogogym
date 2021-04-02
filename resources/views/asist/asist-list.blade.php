@@ -55,8 +55,8 @@
                 'ajax':'{{route('ajax.asist')}}',
                 'columns': [
                     {data: 'id'},
-                    {data: 'id_user'},
                     {data: 'name'},
+                    {data: 'id_user'},
                     {data: 'record_num'},
                     {data: 'createdBy'},
                     {data: 'created_at'},
@@ -72,8 +72,13 @@
                 language:
                     {url: 'i18n/datatables-spanish.json'},
                 dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
+                buttons: [ {
+                    text: 'Excel',
+                    action: function ( e, dt, button, config ) {
+                        window.location = '{{route('asists.excel')}}';
+                    }
+                },
+                    'copy', 'csv', 'pdf', 'print'
                 ]
             });
         });

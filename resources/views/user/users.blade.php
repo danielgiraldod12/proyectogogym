@@ -69,16 +69,21 @@ algun mensaje -->
         $(document).ready(function() {
         window['table'] = $('#usuarios').DataTable( {
             dom: 'Bfrtip',
-            buttons: [
+            buttons: [ {
+                text: 'Excel',
+                action: function ( e, dt, button, config ) {
+                    window.location = '{{route('users.excel')}}';
+                }
+            },
                 'copy', 'csv', 'pdf', 'print'
             ],
             'ajax':'{{route('ajax.user')}}',
             'columns': [
                 {data: 'id'},
-                {data: 'typeOfIdentification'},
-                {data: 'identification_num'},
                 {data: 'name'},
                 {data: 'email'},
+                {data: 'typeOfIdentification'},
+                {data: 'identification_num'},
                 {data: 'record_num'},
                 {data: 'name_program'},
                 {data: 'name_center'},

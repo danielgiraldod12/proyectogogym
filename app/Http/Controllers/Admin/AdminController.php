@@ -19,12 +19,23 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Stmt\TryCatch;
 use Barryvdh\DomPDF\Facade as PDF;
+use App\Exports\UsersExport;
+use App\Exports\AsistsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 use Illuminate\Database\QueryException;
 
 class AdminController extends Controller
 
 {
+
+    public function usersExcel(){
+        return Excel::download(new UsersExport, 'usuarios.xlsx');
+    }
+
+    public function asistsExcel(){
+        return Excel::download(new AsistsExport, 'asistencias.xlsx');
+    }
 
     public function dompdfuser($id){ //Le paso el id
 

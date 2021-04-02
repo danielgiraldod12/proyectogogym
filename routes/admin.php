@@ -79,3 +79,7 @@ Route::get('asist/ajax', [AjaxController::class, 'ajaxAsist'])->middleware('can:
 Route::get('record_nums/ajax', [AjaxController::class, 'ajaxRecordnum'])->middleware('can:ajax.record_num')->name('ajax.record_num');
 Route::get('events/ajax', [AjaxController::class, 'ajaxEvent'])->middleware('can:ajax.event')->name('ajax.event');
 Route::get('programs/ajax', [AjaxController::class, 'ajaxProgram'])->middleware('can:ajax.program')->name('ajax.program');
+
+//Excel
+Route::get('users/excel', [AdminController::class, 'usersExcel'])->name('users.excel');
+Route::get('asists/excel', [AdminController::class, 'asistsExcel'])->name('asists.excel');

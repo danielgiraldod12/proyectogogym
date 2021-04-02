@@ -78,7 +78,7 @@ algun mensaje -->
                     {url: 'i18n/datatables-spanish.json'},
                 dom: 'Bfrtip',
                 buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
+                    'copy', 'csv', 'pdf', 'print'
                 ]
             });
         });

@@ -29,7 +29,7 @@ algun mensaje -->
                     <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Nombre Ficha</th>
+                        <th scope="col">Numero Ficha</th>
                         <th scope="col">Programa</th>
                         <th scope="col">Acciones:</th>
                     </tr>
@@ -80,7 +80,7 @@ algun mensaje -->
                     {url: 'i18n/datatables-spanish.json'},
                 dom: 'Bfrtip',
                 buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
+                    'copy', 'csv', 'pdf', 'print'
                 ]
             });
         });
