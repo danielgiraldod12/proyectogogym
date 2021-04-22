@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Asistencia')
+@section('title', 'Asistencias')
 
 @section('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
@@ -23,6 +23,7 @@
                         <th scope="col">Ficha del Usuario</th>
                         <th scope="col">Creado por</th>
                         <th scope="col">Fecha</th>
+                        <th scope="col">Hora</th>
                         <th scope="col">Acciones</th>
                     </tr>
                     </thead>
@@ -33,6 +34,7 @@
 @endsection
 <!-- CDNs y Script de datatables.net -->
 @section('js')
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
@@ -59,10 +61,12 @@
                     {data: 'id_user'},
                     {data: 'record_num'},
                     {data: 'createdBy'},
-                    {data: 'created_at'},
+                    // {data: 'created_at'},
+                    {data: item => `${parseDate(item.created_at)}`},
+                    {data: item => `${parseHour(item.created_at)}`},
                     {
                         data(data){
-                            return `@can('destroyasistencia')<button onclick="return deleteAsist(${data.id})" class="btn"><i class="fa fa-trash-alt"></i></button>@endcan`;
+                            return `@can('destroyasistencia')<button onclick="return deleteAsist(${data.id})" class="btn btn-outline-dark"><i class="fa fa-trash-alt"></i></button>@endcan`;
                     }
                     }
                 ],
@@ -78,9 +82,45 @@
                         window.location = '{{route('asists.excel')}}';
                     }
                 },
-                    'copy', 'csv', 'pdf', 'print'
+                    {
+                        extend: 'pdfHtml5',
+                        orientation: 'landscape',
+
+
+                        customize: function (doc) {
+                            var tblBody = doc.content[1].table.body;
+
+                            doc.styles.tableHeader.fillColor = 'orangered';
+
+                            doc.content[1].layout = {
+                                hLineWidth: function(i, node) {
+                                    return (i === 0 || i === node.table.body.length) ? 2 : 1;},
+                                vLineWidth: function(i, node) {
+                                    return (i === 0 || i === node.table.widths.length) ? 2 : 1;},
+                                hLineColor: function(i, node) {
+                                    return (i === 0 || i === node.table.body.length) ? 'black' : 'gray';},
+                                vLineColor: function(i, node) {
+                                    return (i === 0 || i === node.table.widths.length) ? 'black' : 'gray';}
+                            };
+                        }
+                    },
+                    'copy', 'csv', 'print'
                 ]
             });
+
+            function parseDate(date){
+                var newDate = moment(date).format('DD/MM/YYYY');
+
+                return newDate;
+            }
+
+            function parseHour(date){
+                var newDate = moment(date).format('h:mm a');
+
+                return newDate;
+            }
         });
+
+
     </script>
 @endsection

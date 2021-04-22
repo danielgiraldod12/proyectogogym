@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Datatables - Create')
+@section('title', 'Crear Usuario')
 
 @section('content')
 @if(Session::has('message'))
@@ -70,16 +70,16 @@
                             @endforeach
                         </select>
                     </div>
-                    <!--
+
                     <div class="form-group">
                         <label>Contraseña</label>
-                        <input class="form-control" type="password" id="password" name="password" required onkeypress="return (event.charCode >= 48 && event.charCode <= 57 || event.charCode >=65 && event.charCode <=90 || event.charCode >=97 && event.charCode <=122)">
+                        <input placeholder="Si no llenas este campo, la contraseña sera el numero de identidad" class="form-control" type="password" id="password" name="password" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 || event.charCode >=65 && event.charCode <=90 || event.charCode >=97 && event.charCode <=122)">
                     </div>
-                    <div class="form-group">
-                        <label for="password_confirmation" value="">Confirmar Contraseña</label>
-                        <input class="form-control" type="password" id="password_confirmation" name="password_confirmation" required onkeypress="return (event.charCode >= 48 && event.charCode <= 57 || event.charCode >=65 && event.charCode <=90 || event.charCode >=97 && event.charCode <=122)">
-                    </div>
-                    -->
+{{--                    <div class="form-group">--}}
+{{--                        <label for="password_confirmation" value="">Confirmar Contraseña</label>--}}
+{{--                        <input class="form-control" type="password" id="password_confirmation" name="password_confirmation" required onkeypress="return (event.charCode >= 48 && event.charCode <= 57 || event.charCode >=65 && event.charCode <=90 || event.charCode >=97 && event.charCode <=122)">--}}
+{{--                    </div>--}}
+{{--                    -->--}}
                     <button type="submit" class="btn btn-primary">REGISTRAR</button><br><br>
                 </form>
             </div>

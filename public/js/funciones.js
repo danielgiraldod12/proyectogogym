@@ -43,7 +43,7 @@ function calcular(){
 		//Mostramos el div de resultados
 		$("#resultado").show();
 		//Obtenemos los valores ingresados por el usuario
-		
+
 
 		//Calculamos el imc
 		talla=talla/100;
@@ -87,11 +87,11 @@ function calcular(){
 			$("#obeso").show();
 		}
 
-        
+
 		$("#imc").html(imc);
 		$("#estado").html(estado);
 		ocultar();
-		
+
 		//Mostramos los resultados
 	}
 	else{

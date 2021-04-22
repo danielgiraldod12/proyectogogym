@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Datatables - Edit')
+@section('title', 'Editar Usuario')
 
 @section('content')
 @routes

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Dompdf\Dompdf;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
@@ -22,7 +23,6 @@ use Barryvdh\DomPDF\Facade as PDF;
 use App\Exports\UsersExport;
 use App\Exports\AsistsExport;
 use Maatwebsite\Excel\Facades\Excel;
-
 use Illuminate\Database\QueryException;
 
 class AdminController extends Controller
@@ -35,6 +35,10 @@ class AdminController extends Controller
 
     public function asistsExcel(){
         return Excel::download(new AsistsExport, 'asistencias.xlsx');
+    }
+
+    public function usersPdf(){
+        return Dompdf::download(new UsersExport, 'usuarios.pdf');
     }
 
     public function dompdfuser($id){ //Le paso el id
@@ -64,7 +68,7 @@ class AdminController extends Controller
 
         $NumUsers = User::all()->count(); //Estoy contando todos los registros de la tabla users
         $NumFichas = Record_num::all()->count(); //Estoy contando todos los registros de la tabla fichas
-        $NumEvents = Event::all()->where('state',1)->count(); //Estoy contando todos los registros de la tabla eventos
+        $NumEvents = Event::all()->where('state','Activo')->count(); //Estoy contando todos los registros de la tabla eventos
         $NumPrograms = Training_program::all()->count(); //Cuento los programas
 
         return view('dashboard', compact('NumUsers', 'NumPrograms', 'NumFichas', 'NumEvents')); //mostrar numero de usurios,eventos y fichas en la vista dashboard
@@ -101,7 +105,12 @@ class AdminController extends Controller
         $id->id_record_num = $request->id_record_num;
         $id->id_training_program = $request->id_training_program;
         $id->id_training_center = $request->id_training_center;
-        $id->password = Hash::make($request->identification_num);
+        if(!empty($request->password)){
+            $id->password = Hash::make($request->password);
+        }else{
+            $id->password = Hash::make($request->identification_num);
+        }
+
         $id->assignRole('Usuario');
 
         //$id->save(); //Le digo que guarde la informacion
@@ -168,8 +177,6 @@ class AdminController extends Controller
 
         /* Le digo que utilice el request para que llame la informacion de los
         inputs de la vista edit y actualice el registro correspondiente */
-
-
     }
 
     public function destroy(User $id){
@@ -191,14 +198,31 @@ class AdminController extends Controller
         return view("profile")->with("user", $user);
     }
 
-    public function updateprofile(Request $request, User $id){
+    public function updatepassword(Request $request){
         $user = Auth::user();
-        $UserPassword = User::query()->select('password')->where('id',$id)->first();
-        if ($request->current_password == $UserPassword) {
-            $id->password = $request->password;
-            $id->save();
+        $current = $request->current_password;
+        if(Hash::check($current, $user->password)){
+            if($request->password === $request->password_confirmation){
+                $user->password = Hash::make($request->password);
+                $user->save();
+                return redirect()->route('dashboard.profile')->with('message','Contraseña actualizada correctamente');
+            }else{
+                return redirect()->route('dashboard.profile')->with('alert','La confirmacion de contraseña es diferente a la que ingresaste antes');
+            }
+        }else{
+            return redirect()->route('dashboard.profile')->with('alert','La contraseña no coincide con tu contraseña actual');
         }
-        return redirect()->route('dashboard.profile');
+
+    }
+
+    public function updateprofile(Request $request){
+        $user = Auth::user();
+        //$userEdit = User::query()->select('password')->where('id',$user->id)->first();
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+        return redirect()->route('dashboard.profile')->with('message', 'Información actualizada');
     }
 
 }

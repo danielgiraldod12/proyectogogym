@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Asist;
@@ -11,6 +12,9 @@ use Illuminate\Support\Facades\DB;
 class ChartController extends Controller
 {
     public function chart1(){
+
+        $year = Carbon::now('GMT');
+        $year->toObject();
         /* Creo la variable months y llamo al modelo User y le digo que me seleccione
         unicamente el mes de la columna created_at(creado en) con el alias mes y que
         ademas lo cuente por id, y despues le digo que lo agrupe por el mes*/
@@ -25,7 +29,7 @@ class ChartController extends Controller
             datas me almacene la cantidad de usuarios reg en cada mes */
         }
         /* Le paso la vista chart1 y le digo que puede utilizar la variable datas */
-        return view('charts/chart1', compact('datas'));
+        return view('charts/chart1', compact('datas','year'));
     }
 
     public function chart2(){

@@ -1,5 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;1,300&display=swap'); /* fuente */
-
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
+input:-webkit-autofill:first-line {
+    color: white;
+}
+/*@-webkit-keyframes autofill {*/
+/*    0%,100% {*/
+/*        color: white;*/
+/*        background: transparent;*/
+/*    }*/
+/*}*/
 *{ /* estilos a todo  */
 margin: 0;
 padding: 0;

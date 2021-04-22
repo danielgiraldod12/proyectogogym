@@ -8,8 +8,11 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PhpOffice\PhpSpreadsheet\Writer\Pdf;
+
 
 class UsersExport implements FromCollection, WithHeadings, ShouldAutoSize, WithStyles
+
 {
     /**
     * @return \Illuminate\Support\Collection

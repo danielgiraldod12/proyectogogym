@@ -43,6 +43,7 @@ class UserFactory extends Factory
             },
             'created_at' => $this->faker->date("2020-m-d H:i:s"),
             'password' => bcrypt($identification_num), // password
+
         ];
     }
 }

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title' , 'Datatables')
+@section('title' , 'Fichas')
 
 @section('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
@@ -67,8 +67,8 @@ algun mensaje -->
                     {data: 'name_program'},
                     {
                         data(data){
-                            return `@can('editrn')<button class='btn'><a href='{{route('editrn', "")}}/${data.id}'><i style="color:black;" class='fa fa-user-edit'></i></a></button>@endcan
-                            @can('destroyrn')<button onclick="return deleteRecord(${data.id})" class="btn"><i class="fa fa-trash-alt"></i></button>@endcan
+                            return `@can('editrn')<button class='btn btn-outline-dark'><a href='{{route('editrn', "")}}/${data.id}'><i style="color:black;" class='fa fa-user-edit'></i></a></button>@endcan
+                            @can('destroyrn')<button onclick="return deleteRecord(${data.id})" class="btn btn-outline-dark"><i class="fa fa-trash-alt"></i></button>@endcan
                             `;
                         }
                     }
@@ -80,8 +80,34 @@ algun mensaje -->
                     {url: 'i18n/datatables-spanish.json'},
                 dom: 'Bfrtip',
                 buttons: [
-                    'copy', 'csv', 'pdf', 'print'
-                ]
+                    {
+                        extend: 'pdfHtml5',
+
+                        customize: function (doc) {
+                            var tblBody = doc.content[1].table.body;
+
+                            doc.styles.tableHeader.fillColor = 'orangered';
+
+
+                            doc.content[1].layout = {
+                                hLineWidth: function (i, node) {
+                                    return (i === 0 || i === node.table.body.length) ? 2 : 1;
+                                },
+                                vLineWidth: function (i, node) {
+                                    return (i === 0 || i === node.table.widths.length) ? 2 : 1;
+                                },
+                                hLineColor: function (i, node) {
+                                    return (i === 0 || i === node.table.body.length) ? 'black' : 'gray';
+                                },
+                                vLineColor: function (i, node) {
+                                    return (i === 0 || i === node.table.widths.length) ? 'black' : 'gray';
+                                }
+                            };
+                        }
+                    },
+                    'copy', 'csv', 'print'
+
+                ],
             });
         });
     </script>

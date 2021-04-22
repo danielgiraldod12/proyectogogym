@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Datatables - Create')
+@section('title', 'Crear Fichas')
 
 @section('content')
 @if(Session::has('message'))

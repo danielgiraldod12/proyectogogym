@@ -24,8 +24,10 @@ class AsistsExport implements FromCollection, WithHeadings, ShouldAutoSize, With
                 'id_user',
                 'record_num',
                 'createdBy',
-                'created_at'
-            ])->get();
+            ])->selectRaw("DATE_FORMAT(created_at, '%d/%m/%Y') as Fecha")
+            ->selectRaw("DATE_FORMAT(created_at, '%h:%i %p') as Hora")
+            ->orderBy('id','asc')
+            ->get();
     }
 
     public function headings(): array
@@ -36,7 +38,8 @@ class AsistsExport implements FromCollection, WithHeadings, ShouldAutoSize, With
             'Id del Usuario',
             'Ficha del Usuario',
             'Creado por',
-            'Fecha'
+            'Fecha',
+            'Hora'
         ];
     }
 

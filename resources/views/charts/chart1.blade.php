@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title' , 'Chart')
+@section('title' , 'Grafica Usuario')
 
 @section('content')
     <div class="card">
@@ -25,7 +25,7 @@
         data: {
             labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Agos', 'Sept', 'Oct', 'Nov', 'Dic'],
             datasets: [{
-                label: '# de usuarios registrados segun el mes en el año 2020',
+                label: '# de usuarios registrados segun el mes en el año '+@json($year->year),
                 /* Le paso la variable datas con la propiedad json_encode para convertir
                 el array en string, ya que el echo no imprime arrays*/
                 data: <?php echo json_encode($datas) ?>,

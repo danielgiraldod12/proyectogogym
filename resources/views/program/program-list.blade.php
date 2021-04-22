@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title' , 'Datatables')
+@section('title' , 'Programas')
 
 @section('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
@@ -30,7 +30,7 @@ algun mensaje -->
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Nombre Programa</th>
-                        <th scope="col">Acciones: </th>
+                        <th scope="col">Acciones:</th>
                     </tr>
                     </thead>
                 </table>
@@ -57,16 +57,16 @@ algun mensaje -->
     <script src="{{asset('js/datatables.js')}}"></script>
     <script src="{{asset('js/ajax/confirmations.js')}}"></script>
     <script>
-        $(document).ready(function() {
-           window['table'] = $('#programs').DataTable( {
+        $(document).ready(function () {
+            window['table'] = $('#programs').DataTable({
                 "ajax": "{{route('ajax.program')}}",
-                "columns" : [
+                "columns": [
                     {data: 'id'},
                     {data: 'name_program'},
                     {
-                        data(data){
-                            return `@can('editprog')<button class="btn"><a href="{{route('editprog', "")}}/${data.id}"><i style="color: black;" class="fa fa-user-edit"></i></a></button>@endcan
-                            @can('destroyprog')<button onclick="return deleteProgram(${data.id})" class="btn"><i class="fa fa-trash-alt"></i></button>@endcan
+                        data(data) {
+                            return `@can('editprog')<button class="btn btn-outline-dark"><a href="{{route('editprog', "")}}/${data.id}"><i style="color: black;" class="fa fa-user-edit"></i></a></button>@endcan
+                            @can('destroyprog')<button onclick="return deleteProgram(${data.id})" class="btn btn-outline-dark"><i class="fa fa-trash-alt"></i></button>@endcan
                             `;
                         }
                     }
@@ -78,8 +78,33 @@ algun mensaje -->
                     {url: 'i18n/datatables-spanish.json'},
                 dom: 'Bfrtip',
                 buttons: [
-                    'copy', 'csv', 'pdf', 'print'
-                ]
+                    {
+                        extend: 'pdfHtml5',
+
+                        customize: function (doc) {
+                            var tblBody = doc.content[1].table.body;
+
+                            doc.styles.tableHeader.fillColor = 'orangered';
+
+                            doc.content[1].layout = {
+                                hLineWidth: function (i, node) {
+                                    return (i === 0 || i === node.table.body.length) ? 2 : 1;
+                                },
+                                vLineWidth: function (i, node) {
+                                    return (i === 0 || i === node.table.widths.length) ? 2 : 1;
+                                },
+                                hLineColor: function (i, node) {
+                                    return (i === 0 || i === node.table.body.length) ? 'black' : 'gray';
+                                },
+                                vLineColor: function (i, node) {
+                                    return (i === 0 || i === node.table.widths.length) ? 'black' : 'gray';
+                                }
+                            };
+                        }
+                    },
+                    'copy', 'csv', 'print'
+
+                ],
             });
         });
     </script>

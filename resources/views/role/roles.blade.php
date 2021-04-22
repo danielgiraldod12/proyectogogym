@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Datatables - Edit')
+@section('title', 'Asignar Roles')
 
 @section('content')
-
+    @routes
     @if($id == $idLog)
         <div class="alert alert-warning" role="alert">
             No te recomendamos cambiar tus propios roles!
@@ -46,4 +46,10 @@
             {!! Form::close() !!}
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="{{asset('js/datatables.js')}}"></script>
 @endsection

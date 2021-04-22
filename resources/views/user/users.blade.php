@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title' , 'Datatables')
+@section('title' , 'Usuarios')
 
 @section('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
@@ -23,6 +23,7 @@ algun mensaje -->
 @endif
 
 <div class="card">
+    <div class="col-12">
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-striped" id="usuarios">
@@ -45,6 +46,7 @@ algun mensaje -->
         </div>
     </div>
 </div>
+</div>
 @endsection
 <!-- CDNs y Script de datatables.net -->
 @section('js')
@@ -64,18 +66,40 @@ algun mensaje -->
         <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.colVis.min.js"></script>
         <script src="{{asset('js/datatables.js')}}"></script>
         <script src="{{asset('js/ajax/confirmations.js')}}"></script>
-
         <script>
         $(document).ready(function() {
         window['table'] = $('#usuarios').DataTable( {
             dom: 'Bfrtip',
             buttons: [ {
                 text: 'Excel',
-                action: function ( e, dt, button, config ) {
+                action: function ( ) {
                     window.location = '{{route('users.excel')}}';
                 }
             },
-                'copy', 'csv', 'pdf', 'print'
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    pageSize: 'A4',
+
+                    customize: function (doc) {
+                        var tblBody = doc.content[1].table.body;
+
+                        doc.styles.tableHeader.fillColor = 'orangered';
+
+                        doc.content[1].layout = {
+                            hLineWidth: function(i, node) {
+                                return (i === 0 || i === node.table.body.length) ? 2 : 1;},
+                            vLineWidth: function(i, node) {
+                                return (i === 0 || i === node.table.widths.length) ? 2 : 1;},
+                            hLineColor: function(i, node) {
+                                return (i === 0 || i === node.table.body.length) ? 'black' : 'gray';},
+                            vLineColor: function(i, node) {
+                                return (i === 0 || i === node.table.widths.length) ? 'black' : 'gray';}
+                        };
+                    }
+                },
+                 'copy', 'csv', 'print'
+
             ],
             'ajax':'{{route('ajax.user')}}',
             'columns': [
@@ -90,10 +114,10 @@ algun mensaje -->
                 {
                     data(data){
                         return `
-                        @can('edit')<button class='btn'><a href='{{route('edit', "")}}/${data.id}'><i style='color: black;' class='fa fa-user-edit'></i></a></button>@endcan
-                        @can('destroy')<button onclick="return deleteUser(${data.id})" class="btn"><i class="fa fa-trash-alt"></i></button>@endcan
-                        @can('dompdfuser')<button class="btn"><a href="{{route('dompdfuser', "")}}/${data.id}"><i style="color: black" class="fa fa-download"></i></a></button>@endcan
-                        @can('createasistencia')<button onclick="return asistUser(${data.id})" class="btn"><i style="color: black" class="fa fa-book"></i></button>@endcan
+                        @can('edit')<button class='btn btn-outline-dark'><a href='{{route('edit', "")}}/${data.id}'><i style='color: black;' class='fa fa-user-edit'></i></a></button>@endcan
+                        @can('destroy')<button onclick="return deleteUser(${data.id})" class="btn btn-outline-dark"><i class="fa fa-trash-alt"></i></button>@endcan
+                        @can('dompdfuser')<button class="btn btn-outline-dark"><a href="{{route('dompdfuser', "")}}/${data.id}"><i style="color: black" class="fa fa-download"></i></a></button>@endcan
+                        @can('createasistencia')<button onclick="return asistUser(${data.id})" class="btn btn-outline-dark"><i style="color: black" class="fa fa-book"></i></button>@endcan
                         `;
                     }
                 }

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title' , 'Chart')
+@section('title' , 'Grafica Asistencias')
 
 @section('content')
     <div class="card">

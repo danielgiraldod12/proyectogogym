@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Datatables|Create ')
+@section('title', 'Crear Evento')
 
 @section('content')
 <div class="d-flex justify-content-center">

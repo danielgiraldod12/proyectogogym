@@ -20,7 +20,8 @@ RouteServiceProvider */
 //Dashboard
 Route::get('dashboard', [AdminController::class, 'dashboard'])->middleware('can:dashboard')->name('dashboard');
 //DomPd
-Route::get('dompdf/{id}', [AdminController::class, 'dompdfuser'])->middleware('can:dompdfuser')->name('dompdfuser');
+Route::get('user-pdf/{id}', [AdminController::class, 'dompdfuser'])->middleware('can:dompdfuser')->name('dompdfuser');
+Route::get('usersPdf', [AdminController::class, 'usersPdf'])->name('users.pdf');
 
 //CRUD Users
 Route::get('users', [AdminController::class, 'users'])->middleware('can:users')->name('users');
@@ -64,9 +65,11 @@ Route::put('roles/{id}', [RolesController::class, 'updateroles'])->middleware('c
 Route::get('asistencia', [AsistsController::class, 'asistencia'])->middleware('can:asistencia')->name('asistencia');
 Route::post('createasist/{id}', [AsistsController::class, 'createasistencia'])->middleware('can:createasistencia')->name('createasistencia');
 Route::delete('asistencia/{id}/delete', [AsistsController::class, 'destroyasistencia'])->middleware('can:destroyasistencia')->name('destroyasistencia');
+
 //Perfil
 Route::get('profile', [AdminController::class, 'profile'])->middleware('can:dashboard.profile')->name('dashboard.profile');
-Route::put('profile/{id}/update', [AdminController::class, 'updateprofile'])->name('updateprofile');
+Route::put('profile/updateI', [AdminController::class, 'updateprofile'])->name('updateprofile');
+Route::put('profile/updateP', [AdminController::class, 'updatepassword'])->name('updatepassword');
 
 //Graficas usuarios
 Route::get('dashboard/chart1', [ChartController::class, 'chart1'])->middleware('can:chart.first')->name('chart.first');
