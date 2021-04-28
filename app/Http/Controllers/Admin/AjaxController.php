@@ -10,6 +10,7 @@ use App\Models\Training_program;
 use App\Models\User;
 use Illuminate\Http\Request;
 use DataTables;
+use DB;
 
 class AjaxController extends Controller
 {
@@ -26,9 +27,10 @@ class AjaxController extends Controller
            'users.email', //Email usuario
            'record_nums.record_num', //Ficha del usuario con inner join
            'training_programs.name_program', //Programa del usuario con inner join
-           'training_centers.name_center']) //Centro del usuario con inner join
-       ->get();
+           'training_centers.name_center',//Centro del usuario con inner join
 
+        ])
+       ->get();
 
        return datatables()->of($users)
            ->toJson();

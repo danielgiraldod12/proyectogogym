@@ -10,6 +10,14 @@
         <span aria-hidden="true">&times;</span>
     </button>
     </div>
+@else
+    <div class="alert alert-info" role="alert">
+        ¡Ten en cuenta que si no le asignas ninguna contraseña al usuario, este usuario se creara con el
+        numero de identidad que ingresaste como contraseña!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 @endif
 <div class="d-flex justify-content-center">
 <div class="card w-50">
