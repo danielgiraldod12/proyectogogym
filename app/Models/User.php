@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,6 +13,21 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * Class User
+ * @property int $id
+ * @property string $typeOfIdentification
+ * @property int $identification_num
+ * @property string $name
+ * @property string $email
+ * @property int $id_record_num
+ * @property int $id_training_program
+ * @property int $id_training_center
+ * @property string $password
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @package App\Models
+ */
 
 class User extends Authenticatable
 {
@@ -23,7 +40,7 @@ class User extends Authenticatable
 
 
     /**
-     * The attributes that are mass assignable.
+     * Los atributos que pueden ser rellenados masivamente.
      *
      * @var array
      */
@@ -43,7 +60,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
+     * Los atributos que deberian estar escondidos en los arrays.
      *
      * @var array
      */
@@ -56,7 +73,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be cast to native types.
+     * Los atributos que desea castear a un tipo en especifico.
      *
      * @var array
      */
@@ -65,7 +82,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * The accessors to append to the model's array form.
+     * Los descriptores de acceso para agregar a la forma del array del modelo.
      *
      * @var array
      */
@@ -77,64 +94,54 @@ class User extends Authenticatable
         return 'show';
     }
 
-    //Relacion uno a muchos (inversa)
+    /***
+     * Relacion 1 a muchos (inversa)
+     */
+
+    /**
+     * A tabla Fichas
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function record_num(){
         return $this->belongsTo('App\Models\Record_num');
     }
+
+    /**
+     * A tabla programas
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function training_program(){
         return $this->belongsTo('App\Models\Training_program');
     }
+
+    /**
+     * A tabla centros
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function training_center(){
         return $this->belongsTo('App\Models\Training_center');
     }
 
-    //Relacion uno a muchos
+    /**
+     * Relacion 1 a muchos
+     */
+
+    /**
+     * A tabla asistencias
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function asistencias(){
         return $this->hasMany('App\Models\Asist');
     }
+
+    /**
+     * A tabla eventos
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function eventos(){
         return $this->hasMany('App\Models\Event');
     }
 
-    /**
-     * @param Builder $query
-     * @param $roles
-     * @param null $guard
-     * @return Builder
-     * how to use it:
-     * $users = User::notRole('Admin')->get();
-     * $users = User::notRole(['Admin', 'Super Admin'])->get();
-     */
-
-    public function scopeNotRole(Builder $query, $roles, $guard = null): Builder
-    {
-        if ($roles instanceof Collection) {
-            $roles = $roles->all();
-        }
-
-        if (! is_array($roles)) {
-            $roles = [$roles];
-        }
-
-        $roles = array_map(function ($role) use ($guard) {
-            if ($role instanceof Role) {
-                return $role;
-            }
-
-            $method = is_numeric($role) ? 'findById' : 'findByName';
-            $guard = $guard ?: $this->getDefaultGuardName();
-
-            return $this->getRoleClass()->{$method}($role, $guard);
-        }, $roles);
-
-        return $query->whereHas('roles', function ($query) use ($roles) {
-            $query->where(function ($query) use ($roles) {
-                foreach ($roles as $role) {
-                    $query->where(config('permission.table_names.roles').'.id', '!=' , $role->id);
-                }
-            });
-        });
-    }
 
 
 }

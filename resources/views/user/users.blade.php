@@ -37,6 +37,7 @@ algun mensaje -->
                     <th scope="col">Ficha</th>
                     <th scope="col">Programa</th>
                     <th scope="col">Centro</th>
+                    <th scope="col">Cant. Asistencias</th>
                     <th scope="col">Acciones: </th>
                 </tr>
             </thead>
@@ -111,6 +112,7 @@ algun mensaje -->
                 {data: 'record_num'},
                 {data: 'name_program'},
                 {data: 'name_center'},
+                {data: 'cantAsists'},
                 {
                     data(data){
                         return `

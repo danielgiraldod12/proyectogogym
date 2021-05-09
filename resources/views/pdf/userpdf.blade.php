@@ -20,6 +20,7 @@
             <h3>Ficha: <span>{{$datatables->record_num}}</span></h3>
             <h3>Programa: <span> {{$datatables->name_program}}</span></h3>
             <h3>Centro: <span>{{$datatables->name_center}}</span></h3>
+            <h3>Cant. Asist: <span>{{$datatables->cantAsists}}</span></h3>
         </div>
     </div>
 </div>

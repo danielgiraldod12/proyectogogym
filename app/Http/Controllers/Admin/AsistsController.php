@@ -11,17 +11,32 @@ use App\Models\Record_num;
 
 class AsistsController extends Controller
 {
+    /**
+     * Renderizo la vista de la tabla asistencia, aunque la informacion se envia por otro
+     * lado
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function asistencia(){
-
         return view('asist.asist-list');
     }
 
-    public function createasistencia(User $id){
+    /**
+     * Creo un registro en la tabla asistencias y redirecciono a la vista de usuarios
+     * @param User $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
 
+    public function createasistencia(User $id){
+        /**
+         * Busco la ficha del usuario con el id en la tabla de fichas
+         */
         $userRn = Record_num::query()->where('id',$id->id_record_num)->get()->first();
 
         $asist = new Asist();
 
+        /**
+         * Relleno la informacion del registro y guardo
+         */
         $asist->id_user = $id->id;
         $asist->name = $id->name;
         $asist->createdBy = Auth::user()->email;
@@ -29,9 +44,15 @@ class AsistsController extends Controller
 
         $asist->save();
 
-        return redirect()->route('users')->with('message','Asistencia creada correctamente!');
+        return redirect()->route('users');
     }
 
+    /**
+     * Elimino un registro en la tabla asistencias
+     * @param Asist $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
     public function destroyasistencia(Asist $id){
 
         if($id){
@@ -40,7 +61,5 @@ class AsistsController extends Controller
         }else{
             return response()->json(false);
         }
-
-        //return redirect()->route('asistencia')->with('message','Asistencia eliminada correctamente!');
     }
 }

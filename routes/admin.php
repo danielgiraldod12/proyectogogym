@@ -19,9 +19,8 @@ RouteServiceProvider */
 
 //Dashboard
 Route::get('dashboard', [AdminController::class, 'dashboard'])->middleware('can:dashboard')->name('dashboard');
-//DomPd
+//DomPdf
 Route::get('user-pdf/{id}', [AdminController::class, 'dompdfuser'])->middleware('can:dompdfuser')->name('dompdfuser');
-Route::get('usersPdf', [AdminController::class, 'usersPdf'])->name('users.pdf');
 
 //CRUD Users
 Route::get('users', [AdminController::class, 'users'])->middleware('can:users')->name('users');

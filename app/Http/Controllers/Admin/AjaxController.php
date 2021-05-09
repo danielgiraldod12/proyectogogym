@@ -15,10 +15,16 @@ use DB;
 class AjaxController extends Controller
 {
    public function ajaxUser(){
+
+       /**
+        * Hago una consulta a la tabla usuarios haciendo con diferentes inner joins y
+        * un left join para traer informacion de otras tablas
+        */
        $users = User::query() //Creo la variable datatables con el modelo User y el metodo query
        ->join('record_nums','record_nums.id', '=', 'users.id_record_num') //Inner join con la tabla ficha
        ->join('training_programs','training_programs.id', '=', 'users.id_training_program') //Inner join con la tabla programa
        ->join('training_centers','training_centers.id', '=', 'users.id_training_center') //Inner join con la tabla centro
+       ->leftJoin('asists','asists.id_user','=','users.id') // Left join con asists
        ->select([ //Selecciono
            'users.id', //Id de Usuario
            'users.typeOfIdentification', //Tipo de Doc
@@ -28,9 +34,14 @@ class AjaxController extends Controller
            'record_nums.record_num', //Ficha del usuario con inner join
            'training_programs.name_program', //Programa del usuario con inner join
            'training_centers.name_center',//Centro del usuario con inner join
-
-        ])
+            DB::raw('count(`asists`.`id_user`) as cantAsists')]) //Cantidad de asistencias que tiene el usuario con left join
+       ->groupBy('users.id') //Agrupo por id de usuario
        ->get();
+
+       /**
+        * Retorno la informacion en formato json para poder utilizarla en el ajax
+        * del datatables
+        */
 
        return datatables()->of($users)
            ->toJson();
@@ -38,12 +49,24 @@ class AjaxController extends Controller
    }
 
    public function ajaxAsist(){
+       /**
+        * Creo una consulta que me trae todos los registro de la tabla asists
+        */
+
        $asists = Asist::all();
+
+       /**
+        * Retorno la informacion en formato json para poder utilizarla en el ajax
+        * del datatables
+        */
 
        return datatables()->of($asists)->toJson();
    }
 
    public function ajaxRecordnum(){
+       /**
+        * Creo una consulta a la tabla fichas con un inner join
+        */
        $Records = Record_num::query() //Creo la variable datatables con el modelo User y el metodo query
        ->join('training_programs','training_programs.id', '=', 'record_nums.id_training_program') //Inner join con la tabla programa
        ->select([ //Selecciono
@@ -53,10 +76,19 @@ class AjaxController extends Controller
        ])
        ->get();
 
+       /**
+        * Retorno la informacion en formato json para poder utilizarla en el ajax
+        * del datatables
+        */
+
        return datatables()->of($Records)->toJson();
    }
 
    public function ajaxEvent(){
+       /**
+        * Creo una consulta que me trae todos los registros de la tabla eventos
+        */
+
        $events = Event::query() //Creo la variable datatables con el modelo event y el metodo query
        ->select([ //Selecciono
            'events.id', //Id de evento
@@ -67,10 +99,23 @@ class AjaxController extends Controller
        ])
        ->get();
 
+       /**
+        * Retorno la informacion en formato json para poder utilizarla en el ajax
+        * del datatables
+        */
+
        return datatables()->of($events)->toJson();
    }
    public function ajaxProgram(){
+       /**
+        * Creo una consulta que me trae todos los registros de la tabla programas
+        */
        $programs = Training_program::all(); //Creo la variable datatables con el modelo event y el metodo query
+
+       /**
+        * Retorno la informacion en formato json para poder utilizarla en el ajax
+        * del datatables
+        */
 
        return datatables()->of($programs)->toJson();
    }
