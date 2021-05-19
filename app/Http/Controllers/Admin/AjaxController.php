@@ -8,6 +8,7 @@ use App\Models\Event;
 use App\Models\Record_num;
 use App\Models\Training_program;
 use App\Models\User;
+use App\Models\UserRequest;
 use Illuminate\Http\Request;
 use DataTables;
 use DB;
@@ -120,5 +121,24 @@ class AjaxController extends Controller
        return datatables()->of($programs)->toJson();
    }
 
+   public function ajaxRequests(){
+       $usersRequests = UserRequest::query() //Creo la variable datatables con el modelo User y el metodo query
+       ->join('record_nums','record_nums.id', '=', 'user_requests.id_record_num') //Inner join con la tabla ficha
+       ->join('training_programs','training_programs.id', '=', 'user_requests.id_training_program') //Inner join con la tabla programa
+       ->join('training_centers','training_centers.id', '=', 'user_requests.id_training_center') //Inner join con la tabla centro
+       ->select([ //Selecciono
+           'user_requests.id', //Id de Usuario
+           'user_requests.typeOfIdentification', //Tipo de Doc
+           'user_requests.identification_num', //Num de Doc
+           'user_requests.name', //Nombre usuario
+           'user_requests.email', //Email usuario
+           'record_nums.record_num', //Ficha del usuario con inner join
+           'training_programs.name_program', //Programa del usuario con inner join
+           'training_centers.name_center'
+       ])//Centro del usuario con inner join
+       ->get();
+
+       return datatables()->of($usersRequests)->toJson();
+   }
 
 }

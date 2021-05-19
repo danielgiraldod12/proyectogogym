@@ -37,4 +37,13 @@ class Training_program extends Model
     public function record_nums(){
         return $this->hasMany('App\Models\Record_num');
     }
+
+    /**
+     * A tabla solicitud de usuarios
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function request_users(){
+        return $this->hasMany('App\Models\UserRequest');
+    }
+
 }

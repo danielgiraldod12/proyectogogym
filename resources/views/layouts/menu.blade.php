@@ -18,6 +18,7 @@
             <li><a href="{{route("home")}}#IMC">Imc</a></li>
             <li><a href="#">Calendario</a></li>
             <li><a href="{{route("home")}}#contactenos">Contáctenos</a></li>
+            <li><a href="{{ route('register') }}">Registrarse</a></li>
             <li><a href="{{ route('login') }}">Iniciar Sesión</a></li>
         </ul>
     </header>

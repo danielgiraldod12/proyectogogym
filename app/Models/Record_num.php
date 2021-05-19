@@ -33,6 +33,14 @@ class Record_num extends Model
     }
 
     /**
+     * A tabla solicitud de usuarios
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function request_users(){
+        return $this->hasMany('App\Models\UserRequest');
+    }
+
+    /**
      * Relacion 1 a muchos (inversa)
      */
 

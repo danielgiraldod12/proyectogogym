@@ -38,7 +38,6 @@ class User extends Authenticatable
     use TwoFactorAuthenticatable;
     use HasRoles;
 
-
     /**
      * Los atributos que pueden ser rellenados masivamente.
      *
@@ -55,8 +54,7 @@ class User extends Authenticatable
         'identification_num',
         'id_record_num',
         'id_training_program',
-        'id_training_center',
-        'id_rol',
+        'id_training_center'
     ];
 
     /**
@@ -141,8 +139,5 @@ class User extends Authenticatable
     public function eventos(){
         return $this->hasMany('App\Models\Event');
     }
-
-
-
 }
 

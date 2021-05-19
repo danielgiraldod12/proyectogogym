@@ -68,6 +68,11 @@ algun mensaje -->
         <script src="{{asset('js/datatables.js')}}"></script>
         <script src="{{asset('js/ajax/confirmations.js')}}"></script>
         <script>
+
+        /**
+         * Script Datatables
+         */
+
         $(document).ready(function() {
         window['table'] = $('#usuarios').DataTable( {
             dom: 'Bfrtip',
@@ -102,6 +107,10 @@ algun mensaje -->
                  'copy', 'csv', 'print'
 
             ],
+            /**
+             * Ajax tabla usuarios
+             */
+
             'ajax':'{{route('ajax.user')}}',
             'columns': [
                 {data: 'id'},

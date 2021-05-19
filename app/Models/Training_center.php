@@ -31,5 +31,13 @@ class Training_center extends Model
         return $this->hasMany('App\Models\User');
     }
 
+    /**
+     * A tabla solicitud de usuarios
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function request_users(){
+        return $this->hasMany('App\Models\UserRequest');
+    }
+
 
 }

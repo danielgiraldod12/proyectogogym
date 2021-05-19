@@ -30,7 +30,10 @@ Route::post('home', [HomeController::class,'store'])->name('contactanos.store');
 
 Route::get('/calendario', [HomeController::class, 'calendar'])->name('calendar');
 
+Route::get('/register', [HomeController::class, 'register'])->name('register');
+Route::post('/register-user', [HomeController::class, 'requestUser'])->name('request-user');
 /*
+ *
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');*/

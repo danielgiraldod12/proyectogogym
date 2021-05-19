@@ -8,14 +8,18 @@ use App\Http\Controllers\ChartController;
 use App\Http\Controllers\Admin\AsistsController;
 use App\Http\Controllers\Admin\AjaxController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserRequestController;
 
+/**
+ * Este archivo de rutas con la propiedad auth, sirve para que solo se pueda
+ * acceder a estas rutas cuando el usuario este autenticado, haciendo uso del
+ * RouteServiceProvider
+ */
 
-/* Este archivo de rutas con la propiedad auth, sirve para que solo se pueda
-acceder a estas rutas cuando el usuario este autenticado, haciendo uso del
-RouteServiceProvider */
-
-
-// A cada ruta le paso un metodo, una ruta, un controlador, una clase y un nombre
+/**
+ * A cada ruta le paso un metodo, una ruta, un controlador, una funcion y un nombre,
+ * ademas del middleware que verifica si puede acceder a la ruta segun su rol/permiso
+ */
 
 //Dashboard
 Route::get('dashboard', [AdminController::class, 'dashboard'])->middleware('can:dashboard')->name('dashboard');
@@ -29,6 +33,11 @@ Route::post('crear', [AdminController::class, 'crear'])->middleware('can:crear')
 Route::get('users/edit/{id}', [AdminController::class, 'edit'])->middleware('can:edit')->name('edit');
 Route::put('users/{id}', [AdminController::class, 'update'])->middleware('can:update')->name('update');
 Route::delete('users/delete/{id}', [AdminController::class, 'destroy'])->middleware('can:destroy')->name('destroy');
+
+//Solicitudes Usuarios
+Route::get('users/requests', [UserRequestController::class, 'requests'])->name('users-requests');
+Route::post('users/accept/{id}', [UserRequestController::class, 'accept'])->name('accept');
+Route::delete('users/deny/{id}', [UserRequestController::class, 'deny'])->name('deny');
 
 //CRUD Fichas
 Route::get('record_nums', [Record_NumsController::class, 'record_num'])->middleware('can:record_num')->name('record_num');
@@ -81,6 +90,7 @@ Route::get('asist/ajax', [AjaxController::class, 'ajaxAsist'])->middleware('can:
 Route::get('record_nums/ajax', [AjaxController::class, 'ajaxRecordnum'])->middleware('can:ajax.record_num')->name('ajax.record_num');
 Route::get('events/ajax', [AjaxController::class, 'ajaxEvent'])->middleware('can:ajax.event')->name('ajax.event');
 Route::get('programs/ajax', [AjaxController::class, 'ajaxProgram'])->middleware('can:ajax.program')->name('ajax.program');
+Route::get('user-requests/ajax', [AjaxController::class, 'ajaxRequests'])->name('ajax.requests');
 
 //Excel
 Route::get('users/excel', [AdminController::class, 'usersExcel'])->name('users.excel');

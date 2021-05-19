@@ -46,8 +46,10 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
-            /* Creo un nuevo archivo de rutas y le paso la propiedad auth para que
-            solo se pueda acceder a esas rutas cuando el usuario este autenticado*/
+            /**
+             * Creo un nuevo archivo de rutas y le paso la propiedad auth para que
+             * solo se pueda acceder a esas rutas cuando el usuario este autenticado
+             */
             Route::middleware('web', 'auth')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/admin.php'));

@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
+use App\Models\Record_num;
 
 class HomeTest extends TestCase
 {
@@ -13,15 +14,16 @@ class HomeTest extends TestCase
      */
     public function test_example()
     {
-//        $response = $this->get('/');
+        $response = $this->get('/');
 
 //        $this->assertAuthenticated($guard = null);
-//        $response = $this->json('POST', 'crearrn', [
-//            'record_num' => '206111',
-//            'id_training_program' => '1']);
-//
-//        $response
-//            ->assertStatus(201)
-//            ;
+
+        $response = new Record_num();
+
+        $response->id_training_program = 1;
+        $response->record_num = 201621;
+        $response->save();
+
+        $response->assertOk();
     }
 }

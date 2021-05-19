@@ -1,3 +1,10 @@
+/**
+ * La funcion espera que le respondan en la confirmacion de los mensajes,
+ * si se devuelve un "isConfirmed", ejecutara el submit del formulario automaticamente,
+ * si no, simplemente se cerrara la confirmacion.
+ * @param event
+ */
+
 function editconf(event) {
     event.preventDefault();
     Swal.fire({
@@ -5,6 +12,7 @@ function editconf(event) {
         text: "Esta accion editara este registro",
         icon: 'info',
         showCancelButton: true,
+        cancelButtonText: "Cancelar",
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Si, editalo!',
@@ -14,6 +22,12 @@ function editconf(event) {
         }
     })
 }
+/**
+ * La funcion espera que le respondan en la confirmacion de los mensajes,
+ * si se devuelve un "isConfirmed", ejecutara el submit del formulario automaticamente,
+ * si no, simplemente se cerrara la confirmacion.
+ * @param event
+ */
 
 function editrol(event) {
     event.preventDefault();
@@ -21,6 +35,7 @@ function editrol(event) {
         title: 'Estas seguro?',
         icon: 'info',
         showCancelButton: true,
+        cancelButtonText: "Cancelar",
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Si, editalo!',

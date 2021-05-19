@@ -389,6 +389,11 @@ return [
         ],
         ['header' => 'DATATABLES'],*/
         [
+            'text' => 'Solicitudes de Usuarios',
+            'url'  => 'users/requests',
+            'icon' => 'fas fa-fw fa-user'
+        ],
+        [
             'text' => 'Asignar rol',
             'url'  => 'roles',
             'icon' => 'fas fa-fw fa-user',
