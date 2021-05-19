@@ -35,9 +35,9 @@ Route::put('users/{id}', [AdminController::class, 'update'])->middleware('can:up
 Route::delete('users/delete/{id}', [AdminController::class, 'destroy'])->middleware('can:destroy')->name('destroy');
 
 //Solicitudes Usuarios
-Route::get('users/requests', [UserRequestController::class, 'requests'])->name('users-requests');
-Route::post('users/accept/{id}', [UserRequestController::class, 'accept'])->name('accept');
-Route::delete('users/deny/{id}', [UserRequestController::class, 'deny'])->name('deny');
+Route::get('users/requests', [UserRequestController::class, 'requests'])->middleware('can:users-requests')->name('users-requests');
+Route::post('users/accept/{id}', [UserRequestController::class, 'accept'])->middleware('can:accept')->name('accept');
+Route::delete('users/deny/{id}', [UserRequestController::class, 'deny'])->middleware('can:deny')->name('deny');
 
 //CRUD Fichas
 Route::get('record_nums', [Record_NumsController::class, 'record_num'])->middleware('can:record_num')->name('record_num');

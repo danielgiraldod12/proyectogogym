@@ -32,7 +32,7 @@
             <p class="form-control">{{$user->name}}</p>
 
             <h2 class="h5">Listado de Roles</h2>
-            {!! Form::model($user, ['route' => ['updateroles', $user->id], 'method' => 'put']) !!}
+            {!! Form::model($user, ['route' => ['updateroles', $user->id], 'method' => 'put', 'onsubmit' => 'editrol(event)','id' => 'form']) !!}
             @foreach ($roles as $role)
                 <div>
                     <label>
@@ -42,7 +42,7 @@
                 </div>
             @endforeach
 
-            {!! Form::submit('Asignar un rol', ['class' => 'btn btn-primary mt-2'])!!}
+            {!! Form::submit('Asignar un rol', ['class' => 'btn btn-primary mt-2', 'type' => 'submit'])!!}
             {!! Form::close() !!}
         </div>
     </div>

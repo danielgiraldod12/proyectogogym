@@ -37,7 +37,7 @@
                             <th scope="col">Ficha</th>
                             <th scope="col">Programa</th>
                             <th scope="col">Centro</th>
-                            <th scope="col">Acciones: </th>
+                            <th scope="col">Acciones:</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -72,14 +72,14 @@
          * Script Datatables
          */
 
-        $(document).ready(function() {
-            window['table'] = $('#usuarios').DataTable( {
+        $(document).ready(function () {
+            window['table'] = $('#usuarios').DataTable({
                 dom: 'Bfrtip',
                 /**
                  * Ajax tabla solicitudes de usuarios
                  */
 
-                'ajax':'{{route('ajax.requests')}}',
+                'ajax': '{{route('ajax.requests')}}',
                 'columns': [
                     {data: 'id'},
                     {data: 'name'},
@@ -90,10 +90,10 @@
                     {data: 'name_program'},
                     {data: 'name_center'},
                     {
-                        data(data){
+                        data(data) {
                             return `
-                       @can('createasistencia')<button onclick="return accept(${data.id})" class="btn btn-outline-success"><i style="color: black" class="fa fa-check"></i></button>@endcan
-                            @can('createasistencia')<button onclick="return deny(${data.id})" class="btn btn-outline-danger"><i style="color: black" class="fa fa-times"></i></button>@endcan
+                       @can('accept')<button onclick="return accept(${data.id})" class="btn btn-outline-success"><i style="color: black" class="fa fa-check"></i></button>@endcan
+                            @can('deny')<button onclick="return deny(${data.id})" class="btn btn-outline-danger"><i style="color: black" class="fa fa-times"></i></button>@endcan
                             `;
                         }
                     }
