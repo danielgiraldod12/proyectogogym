@@ -15,12 +15,13 @@ use DB;
 
 class AjaxController extends Controller
 {
+    /**
+     * Hago una consulta a la tabla usuarios haciendo con diferentes inner joins y
+     * un left join para traer informacion de otras tablas
+     * @return mixed
+     * @throws \Exception
+     */
    public function ajaxUser(){
-
-       /**
-        * Hago una consulta a la tabla usuarios haciendo con diferentes inner joins y
-        * un left join para traer informacion de otras tablas
-        */
        $users = User::query() //Creo la variable datatables con el modelo User y el metodo query
        ->join('record_nums','record_nums.id', '=', 'users.id_record_num') //Inner join con la tabla ficha
        ->join('training_programs','training_programs.id', '=', 'users.id_training_program') //Inner join con la tabla programa
@@ -49,10 +50,13 @@ class AjaxController extends Controller
 
    }
 
+    /**
+     * Creo una consulta que me trae todos los registro de la tabla asists
+     * @return mixed
+     * @throws \Exception
+     */
+
    public function ajaxAsist(){
-       /**
-        * Creo una consulta que me trae todos los registro de la tabla asists
-        */
 
        $asists = Asist::all();
 
@@ -64,10 +68,12 @@ class AjaxController extends Controller
        return datatables()->of($asists)->toJson();
    }
 
+    /**
+     * Creo una consulta a la tabla fichas con un inner join
+     * @return mixed
+     * @throws \Exception
+     */
    public function ajaxRecordnum(){
-       /**
-        * Creo una consulta a la tabla fichas con un inner join
-        */
        $Records = Record_num::query() //Creo la variable datatables con el modelo User y el metodo query
        ->join('training_programs','training_programs.id', '=', 'record_nums.id_training_program') //Inner join con la tabla programa
        ->select([ //Selecciono
@@ -85,10 +91,14 @@ class AjaxController extends Controller
        return datatables()->of($Records)->toJson();
    }
 
+    /**
+     *
+     * Creo una consulta que me trae todos los registros de la tabla eventos
+     * @return mixed
+     * @throws \Exception
+     */
    public function ajaxEvent(){
-       /**
-        * Creo una consulta que me trae todos los registros de la tabla eventos
-        */
+
 
        $events = Event::query() //Creo la variable datatables con el modelo event y el metodo query
        ->select([ //Selecciono
@@ -121,6 +131,13 @@ class AjaxController extends Controller
        return datatables()->of($programs)->toJson();
    }
 
+    /**
+     *
+     * Hago una consulta a la tabla solicitud de usuarios haciendo diferentes inner joins
+     * para traer informacion de otras tablas
+     * @return mixed
+     * @throws \Exception
+     */
    public function ajaxRequests(){
        $usersRequests = UserRequest::query() //Creo la variable datatables con el modelo User y el metodo query
        ->join('record_nums','record_nums.id', '=', 'user_requests.id_record_num') //Inner join con la tabla ficha
@@ -138,6 +155,10 @@ class AjaxController extends Controller
        ])//Centro del usuario con inner join
        ->get();
 
+       /**
+        * Retorno la informacion en formato json para poder utilizarla en el ajax
+        * del datatables
+        */
        return datatables()->of($usersRequests)->toJson();
    }
 

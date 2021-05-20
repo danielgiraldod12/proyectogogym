@@ -1,11 +1,10 @@
 /**
  * Le quito la clase d-none al div con id step2 y se la pongo al step1
  */
-
-function firstStep(){
+function firstStep(event){
+    event.preventDefault();
     step1 = $('#step1')
     step2 = $('#step2')
-
     step1.addClass('d-none')
     step2.removeClass('d-none')
 }
@@ -13,12 +12,10 @@ function firstStep(){
 /**
  * Le quito la clase d-none al div con id step1 y se la pongo al step2
  */
-
-
-function secondStep(){
+function secondStep(event){
+    event.preventDefault();
     step1 = $('#step1')
     step2 = $('#step2')
-
     step2.addClass('d-none')
     step1.removeClass('d-none')
 }
@@ -28,7 +25,6 @@ function secondStep(){
  * enviar, utilizando el preventDefault y el .submit de jQuery.
  * @param event
  */
-function sendForm(event){
-    event.preventDefault();
+function sendForm(){
     $('#form').submit()
 }

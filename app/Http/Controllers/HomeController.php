@@ -159,6 +159,7 @@ class HomeController extends Controller
              * con el mensaje de que se creo correctamente, si hay algun error se recargara la pagina
              * con el mensaje de error que se asigno a la variable $message en el catch de antes.
              */
+
             if (!$error) {
                 return redirect()->route('register')->with('message','¡Solicitud enviada al administrador!');
             } else {
@@ -168,6 +169,5 @@ class HomeController extends Controller
         }else{
             return redirect()->route('register')->with('message', 'Ya existe un usuario con este correo/num de identificacion!');
         }
-
     }
 }

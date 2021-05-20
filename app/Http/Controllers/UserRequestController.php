@@ -36,6 +36,7 @@ class UserRequestController extends Controller
         $createUser->id_training_program = $id->id_training_program;
         $createUser->id_training_center = $id->id_training_center;
         $createUser->password = Hash::make($id->identification_num);
+
         $createUser->save();
 
         $id->delete();
