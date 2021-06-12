@@ -22,13 +22,13 @@
 
             <div class="user-box">
                 <input type="text" id="identification_num" name="identification_num" required
-                       onkeypress="return (event.charCode >= 48 && event.charCode <= 57  || event.charCode <=122)">
+                       onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
                 <label>Num. Documento</label>
             </div>
 
             <div class="user-box">
                 <input type="text" id="name" name="name" required
-                       onkeypress="return (event.charCode >=65 && event.charCode <=90 || event.charCode >=97 && event.charCode <=122 )">
+                       onkeypress="return (event.charCode >=65 && event.charCode <=90 || event.charCode >=97 && event.charCode <=122 || event.charCode == 32)">
                 <label>Nombre</label>
             </div>
 

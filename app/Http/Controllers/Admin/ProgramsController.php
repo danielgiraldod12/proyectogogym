@@ -14,7 +14,8 @@ class ProgramsController extends Controller
 {
     /**
      * Renderizo la vista de la tabla de programas, aunque la informacion de la tabla se manda
-     * desde otro lado.
+     * desde la funcion ajaxProgram() que se encuentra en el controlador
+     * app/Http/Controllers/Admin/AjaxController.php.
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function programs(){

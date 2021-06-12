@@ -16,8 +16,9 @@ class UsersExport implements FromCollection, WithHeadings, ShouldAutoSize, WithS
 
 {
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * Retorna la informacion de la tabla usuarios.
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
         return User::query() //Creo la variable datatables con el modelo User y el metodo query
@@ -33,12 +34,18 @@ class UsersExport implements FromCollection, WithHeadings, ShouldAutoSize, WithS
             'users.identification_num', //Num de Doc
             'record_nums.record_num', //Ficha del usuario con inner join
             'training_programs.name_program', //Programa del usuario con inner join
-            'training_centers.name_center',
-            DB::raw('count(`asists`.`id_user`) as cantAsists')]) //Centro del usuario con inner join
-        ->orderBy('id', 'asc')
-        ->groupBy('users.id')
+            'training_centers.name_center', //Centro del usuario con inner join
+            DB::raw('count(`asists`.`id_user`) as cantAsists')]) //Cant. de asistencias por usuario
+        ->orderBy('id', 'asc') //Ordeno ascendentemente por el id
+        ->groupBy('users.id') //Agrupo por el id de usuario
         ->get();
     }
+
+    /**
+     * Retorna una cabecera, que sera la informacion que se pondra en la primera fila del
+     * archivo de Excel
+     * @return string[]
+     */
     public function headings(): array
     {
         return [
@@ -54,10 +61,17 @@ class UsersExport implements FromCollection, WithHeadings, ShouldAutoSize, WithS
         ];
     }
 
+    /**
+     * Se le asignan estilos a la hoja de excel
+     * @param Worksheet $sheet
+     * @return \bool[][][]
+     */
     public function styles(Worksheet $sheet)
     {
+        /**
+         * Le asigna negrita a la primera fila.
+         */
         return [
-            // Style the first row as bold text.
             1    => ['font' => ['bold' => true]],
         ];
     }

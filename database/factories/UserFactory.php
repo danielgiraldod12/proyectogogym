@@ -42,7 +42,7 @@ class UserFactory extends Factory
                 return Training_center::all()->random()->id;
             },
             'created_at' => $this->faker->date("2020-m-d H:i:s"),
-            'password' => bcrypt($identification_num), // password
+            'password' => bcrypt('12345678'), // password
 
         ];
     }

@@ -21,7 +21,7 @@
     @method('put')
     <div class="form-group">
         <label>Tipo Documento</label>
-        @php($selected =!empty($query->typeOfIdentification) ? $query->typeOfIdentification : '')
+        @php($selected =!empty($id->typeOfIdentification) ? $id->typeOfIdentification : '')
         <select class="form-control" type="text" id="typeOfIdentification" name="typeOfIdentification" required>
             <option value="T.I" {{ $selected=='T.I'  ? 'selected':''}}>T.I</option>
             <option value="C.C" {{ $selected=='C.C'  ? 'selected':''}}>C.C</option>

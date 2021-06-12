@@ -39,12 +39,10 @@ class AjaxController extends Controller
             DB::raw('count(`asists`.`id_user`) as cantAsists')]) //Cantidad de asistencias que tiene el usuario con left join
        ->groupBy('users.id') //Agrupo por id de usuario
        ->get();
-
        /**
         * Retorno la informacion en formato json para poder utilizarla en el ajax
         * del datatables
         */
-
        return datatables()->of($users)
            ->toJson();
 
@@ -101,12 +99,14 @@ class AjaxController extends Controller
 
 
        $events = Event::query() //Creo la variable datatables con el modelo event y el metodo query
+       ->join('users','users.id','=','events.id_user')
        ->select([ //Selecciono
            'events.id', //Id de evento
            'events.title', //Titulo evento
            'events.date', //Fecha del evento
            'events.description', //Descripcion de evento
            'events.state', //Estado del evento
+           'users.email', //Email del usuario que creo el evento
        ])
        ->get();
 
@@ -151,8 +151,8 @@ class AjaxController extends Controller
            'user_requests.email', //Email usuario
            'record_nums.record_num', //Ficha del usuario con inner join
            'training_programs.name_program', //Programa del usuario con inner join
-           'training_centers.name_center'
-       ])//Centro del usuario con inner join
+           'training_centers.name_center' //Centro del usuario con inner join
+       ])
        ->get();
 
        /**

@@ -29,8 +29,9 @@ class AdminController extends Controller
 
 {
     /**
-     * Le digo que descargue la informacion que tiene el UsersExport y que lo haga en formato
-     * xlsx es decir Excel.
+     * Retorna la informacion que tiene el archivo UsersExport ubicado en la carpeta
+     * app/Exports/UserExport.php y que lo haga en un archivo llamado usuarios.xlsx en
+     * formato Excel.
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
     public function usersExcel(){
@@ -38,22 +39,22 @@ class AdminController extends Controller
     }
 
     /**
-     * Le digo que descargue la informacion que tiene el AsistsExport y que lo haga en formato
-     * xlsx es decir Excel.
+     * Retorna la informacion que tiene el archivo UsersExport ubicado en la carpeta
+     * app/Exports/AsistExport.php y que lo haga en un archivo llamado asistencias.xlsx en
+     * formato Excel.
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
     public function asistsExcel(){
         return Excel::download(new AsistsExport, 'asistencias.xlsx');
     }
 
-    /** Le digo que me busque un usuario en especifico y me mande la informacion a una vista
-     * para poner esa informacion en aquella vista, despues le pido que me descargue aquella
-     * vista en formato pdf.
+    /** Retorna la informacion de un usuario en especifico y me mande esa informacion a una vista
+     * para poner esa informacion, despues le pido que me descargue la vista en formato pdf, con toda la
+     * informacion del usuario.
      * @param $id
      * @return mixed
      */
     public function dompdfuser($id){ //Le paso el id
-
     $datatables = User::query()->where('users.id','=',$id) //Creo la variable datatables con el modelo User y el metodo query y hago el where con el id de usuario
             ->join('record_nums','record_nums.id', '=', 'users.id_record_num') //Inner join con la tabla ficha
             ->join('training_programs','training_programs.id', '=', 'users.id_training_program') //Inner join con la tabla programa
@@ -67,12 +68,15 @@ class AdminController extends Controller
                 'users.email', //Email usuario
                 'record_nums.record_num', //Ficha del usuario con inner join
                 'training_programs.name_program', //Programa del usuario con inner join
-                'training_centers.name_center',
-                DB::raw('count(`asists`.`id_user`) as cantAsists')]) //Centro del usuario con inner join
-            ->first(); //Creo la variable datatables con el modelo User y el metodo query*/
+                'training_centers.name_center',  //Centro del usuario con inner join
+                DB::raw('count(`asists`.`id_user`) as cantAsists')]) //Cuento la cantidad de asistencias del usuario
+            ->first();
 
-        $pdf = PDF::loadView('pdf.userpdf', compact ('datatables'));
+        $pdf = PDF::loadView('pdf.userpdf', compact ('datatables')); //Cargo la vista userpdf y le paso la informacion datatables
 
+        /**
+         * Retorna el pdf llamado user-list
+         */
         return $pdf->download('user-list.pdf');
 
     }
@@ -101,7 +105,8 @@ class AdminController extends Controller
 
     /**
      * Renderizo la vista de la tabla de usuarios, aunque la informacion de la tabla se manda
-     * desde otro lado.
+     * desde la funcion ajaxUsers() que se encuentra en el controlador
+     * app/Http/Controllers/Admin/AjaxController.php.
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
 
@@ -115,12 +120,16 @@ class AdminController extends Controller
      */
 
     public function create(){
-        /* Hago las querys de cada tabla para posteriormente usarlas en los selects
-        del formulario create */
+        /**
+         * Hago las querys de cada tabla para posteriormente usarlas en los selects
+         * del formulario crear usuario
+         */
         $queryCentro = Training_center::all();
         $queryPrograma = Training_program::all();
         $queryFicha = Record_num::all();
-        // Retorno la vista create y le digo que puede usar todas las variables creadas anteriormente
+        /**
+         * Retorno la vista create y le digo que puede usar todas las variables creadas anteriormente
+         */
         return view('user/create', compact('queryFicha','queryPrograma','queryCentro'));
     }
 
@@ -133,16 +142,15 @@ class AdminController extends Controller
 
         $id = new User(); //Le digo que me cree un nuevo registro en el modelo User
 
-
         /** Le digo que utilice el request para que llame la informacion de los
         inputs de la vista create y los guarde en cada columna de la tabla users */
-        $id->name = $request->name;
-        $id->email = $request->email;
-        $id->typeOfIdentification = $request->typeOfIdentification;
-        $id->identification_num = $request->identification_num;
-        $id->id_record_num = $request->id_record_num;
-        $id->id_training_program = $request->id_training_program;
-        $id->id_training_center = $request->id_training_center;
+        $id->name = $request->name; //Nombre usuario
+        $id->email = $request->email; //Email usuario
+        $id->typeOfIdentification = $request->typeOfIdentification; //Tipo de documento usuario
+        $id->identification_num = $request->identification_num; //Num de documento usuario
+        $id->id_record_num = $request->id_record_num; //Ficha usuario
+        $id->id_training_program = $request->id_training_program; //Programa usuario
+        $id->id_training_center = $request->id_training_center; //Centro usuario
 
         /**
          * Si en el campo input viene alguna contraseña, esa sera la que se guarde como
@@ -150,9 +158,9 @@ class AdminController extends Controller
          * que haya ingresado el usuario.
          */
         if(!empty($request->password)){
-            $id->password = Hash::make($request->password);
+            $id->password = Hash::make($request->password); //Contraseña usuario
         }else{
-            $id->password = Hash::make($request->identification_num);
+            $id->password = Hash::make($request->identification_num); //Contraseña usuario
         }
 
         /**
@@ -214,15 +222,10 @@ class AdminController extends Controller
         $record_num = Record_num::all();
 
         /**
-         * Le mando el usuario para poder rellenar los inputs con la informacion del usuario
-         */
-        $query = $id;
-
-        /**
          * Retorno a la vista del formulario y con el compact le digo que estas variables que
          * defini en esta funcion, las podra utilizar en la vista.
          */
-        return view('user/edit', compact('id','query','training_program','training_center','record_num'));
+        return view('user/edit', compact('id','training_program','training_center','record_num'));
     }
 
     /**
@@ -299,7 +302,8 @@ class AdminController extends Controller
     public function destroy(User $id){
 
         /**
-         * Si viene algun id, lo eliminara, si no, retornara un falso
+         * Si viene algun id, lo eliminara y respondera true, si no, retornara un falso que sera
+         * interpretado por el ajax para saber si tiene que redibujar la informacion de la tabla o no.
          */
         if($id){
             $id->delete();
@@ -363,7 +367,7 @@ class AdminController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function updateprofile(Request $request){
-        
+
         /**
          * Recupero el usuario que esta iniciado sesion en este momento
          */
@@ -375,8 +379,44 @@ class AdminController extends Controller
          */
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->save();
-        return redirect()->route('dashboard.profile')->with('message', 'Información actualizada');
+
+        /**
+         * Se hace un try catch para verificar y controlar si hay errores
+         * En el try catch se utilizara el QueryException para capturar el error en caso de que
+         * exista alguno.
+         */
+        try {
+            /**
+             * Aquí le asignaremos a la variable $error la respuesta del método save.
+             * La respuesta del método save puede ser un true si guardo o un false si no guardo.
+             * Si la respuesta es true es porque el proceso de guardado funcionó correctamente sin ningun error
+             * por lo cual se niega la respuesta de tal manera que quedará como false y le indique al try catch que no hay error el cual capturar.
+             * En caso de que la respuesta sea false es porque hubo un error en el proceso de guardado y se genero un error
+             * por lo cual se niega la respuesta de tal manera que quedará como true y le indique al try catch que hay un error el cual capturar.
+             */
+            $error = !$user->save();
+        } catch (QueryException $e) {
+            /**
+             * Aquí simplemente le asignamos a la variable $error un true para indicarle a
+             * los siguiente procesos que contenga la función de que hubo un error con el
+             * proceso de guardado.
+             */
+            $error = true;
+            if ($e->getCode() === "23000") {
+                $message = "¡El correo electronico y/o el numero de identidad ya estan en uso!";
+            }
+        }
+
+        /**
+         * Si no hay ningun error a la hora de editar el usuario, se redirigira a la tabla usuarios
+         * con el mensaje de que se edito correctamente, si hay algun error se recargara la pagina
+         * con el mensaje de error que se asigno a la variable $message en el catch de antes.
+         */
+        if (!$error) {
+            return redirect()->route('dashboard.profile')->with('message', 'Información actualizada');
+        } else {
+            return redirect()->route('dashboard.profile')->with('message', $message);
+        }
     }
 
 }

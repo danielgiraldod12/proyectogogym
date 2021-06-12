@@ -5,9 +5,7 @@
 @section('content')
     <div class="login-box">
         @error('email')
-            <span class="invalid-feedback" role="alert">
-                <strong style="color:orangered;">{{ $message }}</strong>
-            </span><br>
+            <strong style="color:orangered;">{{ $message }}</strong>
         @enderror
         <form method="POST" action="{{ route('login') }}" onsubmit="return login()">
             @csrf

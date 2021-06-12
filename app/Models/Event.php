@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $description
  * @property string $state
  * @property int $id_user
+ * @property Carbon $date
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @package App\Models

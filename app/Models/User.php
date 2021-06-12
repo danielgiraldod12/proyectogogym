@@ -38,14 +38,12 @@ class User extends Authenticatable
     use TwoFactorAuthenticatable;
     use HasRoles;
 
+    protected $guard_name = 'web';
     /**
-     * Los atributos que pueden ser rellenados masivamente.
+     * Los atributos que pueden ser rellenados masivamente (factorys, seeders, etc).
      *
      * @var array
      */
-
-    protected $guard_name = 'web';
-
     protected $fillable = [
         'name',
         'email',
@@ -58,7 +56,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Los atributos que deberian estar escondidos en los arrays.
+     * Los atributos de la tabla usuarios que deberian estar escondidos en los arrays.
      *
      * @var array
      */
@@ -80,7 +78,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Los descriptores de acceso para agregar a la forma del array del modelo.
+     * Agregar atributo del accesor al array del modelo.
      *
      * @var array
      */

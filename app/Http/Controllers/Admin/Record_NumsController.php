@@ -11,7 +11,9 @@ use Illuminate\Http\Request;
 class Record_NumsController extends Controller
 {
     /**
-     * Renderizo la vista de la tabla fichas, aunque la informacion se manda por otro lado
+     * Renderizo la vista de la tabla fichas, aunque la informacion se manda desde
+     * la funcion ajaxRecordNum() que se encuentra en el controlador
+     * app/Http/Controllers/Admin/AjaxController.php.
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function record_num(){

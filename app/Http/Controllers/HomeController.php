@@ -37,7 +37,7 @@ class HomeController extends Controller
         $correo=new ContactanosMailable($request->all());
 
         Mail::to('sweden@gmail.com')->send($correo);
-        //dd($request->ip());
+
       return redirect()->route('home')->with('info','Mensaje enviado');
     }
 
@@ -123,14 +123,14 @@ class HomeController extends Controller
              * Con lo que viene por el request
              */
 
-            $userRequest->name = $request->name;
-            $userRequest->email = $request->email;
-            $userRequest->typeOfIdentification = $request->typeOfIdentification;
-            $userRequest->identification_num = $request->identification_num;
-            $userRequest->id_record_num = $request->id_record_num;
-            $userRequest->id_training_program = $request->id_training_program;
-            $userRequest->id_training_center = $request->id_training_center;
-            $userRequest->password = Hash::make($request->identification_num);
+            $userRequest->name = $request->name; //Nombre de la peticion
+            $userRequest->email = $request->email; //Email de la peticion
+            $userRequest->typeOfIdentification = $request->typeOfIdentification; //Tipo de documento de la peticion
+            $userRequest->identification_num = $request->identification_num; //Num de documento de la peticion
+            $userRequest->id_record_num = $request->id_record_num; //Ficha de la peticion
+            $userRequest->id_training_program = $request->id_training_program; //Programa de la peticion
+            $userRequest->id_training_center = $request->id_training_center; //Centro de la peticion
+            $userRequest->password = Hash::make($request->identification_num); //Contraseña
 
             try {
                 /**

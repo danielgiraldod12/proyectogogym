@@ -7,11 +7,14 @@ use App\Http\Requests\EventRequest;
 use App\Models\Event;
 use App\Models\States_event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventsController extends Controller
 {
     /**
-     * Renderizo la tabla de eventos, aunque la informacion de la tabla se envia desde otro lado
+     * Renderizo la tabla de eventos, aunque la informacion de la tabla se envia desde desde
+     * la funcion ajaxEvents() que se encuentra en el controlador
+     * app/Http/Controllers/Admin/AjaxController.php.
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function events(){
@@ -42,11 +45,11 @@ class EventsController extends Controller
         /**
          * Rellena la informacion con lo que viene por el request
          */
-        $id->title = $request->title;
-        $id->date = $request->date;
-        $id->description = $request->description;
-        $id->state = $request->state;
-
+        $id->title = $request->title; //Titulo del evento
+        $id->date = $request->date; //Fecha del evento
+        $id->description = $request->description; //Descripcion del evento
+        $id->state = $request->state; //Estado del evento
+        $id->id_user = Auth::user()->id; //Id del usuario que creo el evento
         /**
          * Guarda el registro
          */
@@ -66,8 +69,7 @@ class EventsController extends Controller
      */
     public function editevents(Event $id){
 
-        $query = $id;
-        return view('event/editevents', compact('id','query'));
+        return view('event/editevents', compact('id'));
     }
 
     /**
@@ -83,10 +85,10 @@ class EventsController extends Controller
          * Reemplaza la informacion del registro con la que viene en el request
          */
 
-        $id->title = $request->title;
-        $id->date = $request->date;
-        $id->description = $request->description;
-        $id->state = $request->state;
+        $id->title = $request->title; //Titulo del evento
+        $id->date = $request->date; //Fecha del evento
+        $id->description = $request->description; //Descripcion del evento
+        $id->state = $request->state; //Estado del evento
 
         /**
          * Guarda

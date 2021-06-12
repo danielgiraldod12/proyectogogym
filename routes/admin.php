@@ -13,7 +13,7 @@ use App\Http\Controllers\UserRequestController;
 /**
  * Este archivo de rutas con la propiedad auth, sirve para que solo se pueda
  * acceder a estas rutas cuando el usuario este autenticado, haciendo uso del
- * RouteServiceProvider
+ * RouteServiceProvider, que se encuentra en la carpeta app/Providers/RouteServiceProvider.php
  */
 
 /**
@@ -44,8 +44,8 @@ Route::get('record_nums', [Record_NumsController::class, 'record_num'])->middlew
 Route::get('record_nums/creatern', [Record_NumsController::class, 'creatern'])->middleware('can:creatern')->name('creatern');
 Route::post('crearrn', [Record_NumsController::class, 'crearrn'])->middleware('can:crearrn')->name('crearrn');
 Route::get('record_nums/edit/{id}', [Record_NumsController::class, 'editrn'])->middleware('can:editrn')->name('editrn');
-Route::put('record_nums/{id}', [Record_NumsController::class, 'updatern'])->middleware('can:updatern')->name('updatern');
-Route::delete('record_nums/{id}/delete', [Record_NumsController::class, 'destroyrn'])->middleware('can:destroyrn')->name('destroyrn');
+Route::put('record_nums/update/{id}', [Record_NumsController::class, 'updatern'])->middleware('can:updatern')->name('updatern');
+Route::delete('record_nums/delete/{id}/', [Record_NumsController::class, 'destroyrn'])->middleware('can:destroyrn')->name('destroyrn');
 
 //CRUD Programas
 Route::get('programs', [ProgramsController::class, 'programs'])->middleware('can:programs')->name('programs');

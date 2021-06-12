@@ -2,8 +2,25 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
+/**
+ * Class UserRequest
+ * @property int $id
+ * @property string $typeOfIdentification
+ * @property int $identification_num
+ * @property string $name
+ * @property string $email
+ * @property int $id_record_num
+ * @property int $id_training_program
+ * @property int $id_training_center
+ * @property string $password
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @package App\Models
+ */
 
 class UserRequest extends Model
 {

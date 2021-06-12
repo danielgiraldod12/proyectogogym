@@ -44,10 +44,10 @@
                 <label>Estado del evento</label>
                 <!-- Condicional de una linea para que en el select este seleccionada la opcion
                 que el usuario tenga guardada en la bd-->
-                @php($selected =!empty($query->state) ? $query->state : '')
+                @php($selected =!empty($id->state) ? $id->state : '')
                 <select class="form-control" type="text" id="state" name="state" required>
-                    <option value="Activo" {{$selected=="1" ? 'selected':''}}>Activo</option>
-                    <option value="Desactivado" {{$selected=="2" ? 'selected':''}} style="font-weight: bold">Desactivado</option>
+                    <option value="Activo" {{$selected=="Activo" ? 'selected':''}}>Activo</option>
+                    <option value="Desactivado" {{$selected=="Desactivado" ? 'selected':''}} style="font-weight: bold">Desactivado</option>
                 </select>
                 <br>
                 @error('state')

@@ -33,6 +33,7 @@ algun mensaje -->
                         <th scope="col">Fecha</th>
                         <th scope="col">Descripcion</th>
                         <th scope="col">Estado</th>
+                        <th scope="col">Creado por</th>
                         <th scope="col">Acciones: </th>
                     </tr>
                     </thead>
@@ -72,6 +73,7 @@ algun mensaje -->
                     {data: 'date'},
                     {data: 'description'},
                     {data: 'state'},
+                    {data: 'email'},
                     {
 
                         data(data){
