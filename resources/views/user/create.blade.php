@@ -88,7 +88,7 @@
 {{--                        <input class="form-control" type="password" id="password_confirmation" name="password_confirmation" required onkeypress="return (event.charCode >= 48 && event.charCode <= 57 || event.charCode >=65 && event.charCode <=90 || event.charCode >=97 && event.charCode <=122)">--}}
 {{--                    </div>--}}
 {{--                    -->--}}
-                    <button type="submit" class="btn btn-primary">REGISTRAR</button><br><br>
+                    <button type="submit" class="btn btn-primary" id="button">REGISTRAR</button><br><br>
                 </form>
             </div>
         </div>
