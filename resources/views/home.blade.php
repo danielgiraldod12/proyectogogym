@@ -4,20 +4,20 @@
 
 @section('contentimc')
 <h3>¿Que es el índice de masa corporal?</h3>
-<p>El Índice de Masa Corporal (IMC) es una medida 
+<p>El Índice de Masa Corporal (IMC) es una medida
     de asociación entre el peso y la talla de una persona.
-    El IMC es usado como uno de varios indicadores 
+    El IMC es usado como uno de varios indicadores
     para evaluar el estado nutricional. <br><br>
-    
-    El IMC constituye la medida poblacional más útil del 
+
+    El IMC constituye la medida poblacional más útil del
     sobrepeso y la obesidad, pues la forma de calcularlo no
-    varía en función del sexo ni de la edad en la población 
-    adulta. No obstante, debe considerarse como una guía 
-    aproximativa, pues puede no corresponder al mismo 
+    varía en función del sexo ni de la edad en la población
+    adulta. No obstante, debe considerarse como una guía
+    aproximativa, pues puede no corresponder al mismo
     grado de gordura en diferentes individuos.<br><br>
-    
-    La Organización Mundial de la Salud, ha propuesto una 
-    clasificación del estado nutricional dependiendo del IMC 
+
+    La Organización Mundial de la Salud, ha propuesto una
+    clasificación del estado nutricional dependiendo del IMC
     de una persona.</p>
 @endsection
 
@@ -25,12 +25,10 @@
     <h3>¿Que es Gogym?</h3>
     <p>GoGym! es un proyecto realizado por estudiantes del SENA y hecho para el SENA, el
         objetivo de este proyecto es hacerle más fácil la administración del gimnasio al encargado
-        del mismo, dándole diferentes herramientas que le permitan tener control e información  
-        de los usuarios, también contamos con diferentes secciones y funcionalidades 
+        del mismo, dándole diferentes herramientas que le permitan tener control e información
+        de los usuarios, también contamos con diferentes secciones y funcionalidades
         para los usuarios, como por ejemplo consultar el calendario para descubrir que hay de nuevo
         en el SENA o poder calcular su propio IMC desde la misma página web</p>
-
-
 @endsection
 @section('contentt')
         <!-- seccion contactenos -->

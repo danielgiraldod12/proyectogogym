@@ -6,7 +6,6 @@
     <title>@yield('title')</title>
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"> <!-- link de los iconos -->
-
 </head>
 <body>
     <!-- header menu -->
@@ -16,7 +15,7 @@
         <ul>
             <li><a href="{{route("home")}}">Inicio</a></li>
             <li><a href="{{route("home")}}#IMC">Imc</a></li>
-            <li><a href="#">Calendario</a></li>
+            <li><a href="{{route('calendar')}}">Calendario</a></li>
             <li><a href="{{route("home")}}#contactenos">Contáctenos</a></li>
             <li><a href="{{ route('register') }}">Registrarse</a></li>
             <li><a href="{{ route('login') }}">Iniciar Sesión</a></li>

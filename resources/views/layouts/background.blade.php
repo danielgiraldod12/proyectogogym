@@ -9,6 +9,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="icon" type="image/png" href="/image/logo.ico"/>
+    @stack('head')
 </head>
 <body>
 <!-- header cabecera -->
@@ -18,7 +19,7 @@
     <ul>
         <li><a href="{{route("home")}}">Inicio</a></li>
         <li><a href="{{route("home")}}#IMC">Imc</a></li>
-        <li><a href="#">Calendario</a></li>
+        <li><a href="{{route('calendar')}}">Calendario</a></li>
         <li><a href="{{route("home")}}#contactenos">Contáctenos</a></li>
         <li><a href="{{ route('register') }}">Registrarse</a></li>
         <li><a href="{{ route('login') }}">Iniciar Sesión</a></li>
