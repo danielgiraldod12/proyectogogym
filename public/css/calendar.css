@@ -1,3 +1,21 @@
 .fc-h-event .fc-event-title {
     white-space: normal;
 }
+.container .card .card-header .titulo_calendario{
+    text-align: center;
+    color: #E75F42;
+}
+.container .card .card-header span{
+    text-align: center;
+    color: white;
+    font-weight: normal;
+    font-size:35px;
+}
+.card{
+    background-color: #595959;
+}
+a{
+    color: orangered;
+}
+
+

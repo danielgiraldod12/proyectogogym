@@ -19,7 +19,7 @@
             </div>
 
             <div class="contentbtniniciar">
-                <button type="submit" class="button-loggin" >Reestablecer contraseña
+                <button type="submit" class="button-loggin" >Restablecer contraseña
                     <span></span>
                     <span></span>
                     <span></span>
