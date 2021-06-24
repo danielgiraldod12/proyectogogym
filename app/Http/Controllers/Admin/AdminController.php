@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\UserRequest;
 use Dompdf\Dompdf;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -95,12 +96,12 @@ class AdminController extends Controller
         $NumFichas = Record_num::all()->count();
         $NumEvents = Event::all()->where('state','Activo')->count();
         $NumPrograms = Training_program::all()->count();
-
+        $NumRequests = UserRequest::all();
         /**
          * Retorno la vista dashboard y ademas con el compact le digo que puede utilizar las
          * variables
          */
-        return view('dashboard', compact('NumUsers', 'NumPrograms', 'NumFichas', 'NumEvents')); //mostrar numero de usurios,eventos y fichas en la vista dashboard
+        return view('dashboard', compact('NumUsers', 'NumPrograms', 'NumFichas', 'NumEvents','NumRequests')); //mostrar numero de usurios,eventos y fichas en la vista dashboard
     }
 
     /**

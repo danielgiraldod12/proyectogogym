@@ -78,6 +78,22 @@
         </a>
     </div>
 </div>
+{{--  Caja 5  --}}
+<div class="col-lg-3 col-6">
+    <div class="small-box bg-dark" style=" top: 5px">
+        <div class="inner">
+            <h3>{{$NumRequests->count()}}</h3>
+            <p>Numero de Solicitudes</p>
+        </div>
+        <div class="icon">
+            <i class="fas fa-users"></i>
+        </div>
+        <a class="small-box-footer" href="{{route('users-requests')}}">
+            Tabla Solicitudes de Registro
+            <i class="fas fa-arrow-circle-right"></i>
+        </a>
+    </div>
+</div>
 @endsection
 
 
