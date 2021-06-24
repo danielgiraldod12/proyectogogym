@@ -4,6 +4,9 @@
 
 @section('content')
     <div class="login-box">
+        @if(Session::has('message'))
+            <strong style="color:orangered;">{{ Session::get('message') }}</strong>
+        @endif
         @error('email')
             <strong style="color:orangered;">{{ $message }}</strong>
         @enderror

@@ -79,6 +79,7 @@
     </div>
 </div>
 {{--  Caja 5  --}}
+@can('users-requests')
 <div class="col-lg-3 col-6">
     <div class="small-box bg-dark" style=" top: 5px">
         <div class="inner">
@@ -94,6 +95,7 @@
         </a>
     </div>
 </div>
+@endcan
 @endsection
 
 

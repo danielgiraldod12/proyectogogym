@@ -32,6 +32,7 @@ Route::get('/calendario', [HomeController::class, 'calendar'])->name('calendar')
 
 Route::get('/register', [HomeController::class, 'register'])->name('register');
 Route::post('/register-user', [HomeController::class, 'requestUser'])->name('request-user');
+Route::match(['GET','POST'], '/login', [HomeController::class, 'login'])->name('login');
 /*
  *
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

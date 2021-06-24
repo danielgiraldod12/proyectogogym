@@ -170,4 +170,69 @@ class HomeController extends Controller
             return redirect()->route('register')->with('message', 'Ya existe un usuario con este correo/num de identificacion!');
         }
     }
+
+    /**
+     * Login validado.
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
+     */
+    public function login(Request $request){
+        /**
+         * Traigo la informacion del post
+         */
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password
+            ];
+
+        if($request->isMethod('POST')){
+            /**
+             * Busco el usuario con el email
+             */
+            $user = User::query()->where('email',$request->email)
+                ->leftJoin('model_has_roles','model_has_roles.model_id','=','users.id')
+                ->leftJoin('roles','roles.id','=','model_has_roles.role_id')
+                ->select([
+                    'users.email',
+                    'roles.name as rol'
+                ])
+                ->first();
+            /**
+             * Si da true, significa que si hay un usuario registrado con el
+             * email que se envio, si da false es porque no existe un registro con ese email
+             */
+            if($user){
+                /**
+                 * Si el usuario tiene como rol usuario, o no tiene rol
+                 * no lo dejamos iniciar sesion
+                 */
+                if($user->rol == 'Usuario' || $user->rol == null){
+                    return back()->withErrors(['email' => 'No tienes suficientes permisos para iniciar sesión']);
+                }else{
+                    /**
+                     * Si la contraseña y el email coinciden, inicia sesion
+                     * normalmente
+                     */
+                    if (Auth::attempt($credentials)) {
+                        $request->session()->regenerate();
+                        return redirect()->intended('dashboard');
+                    }
+
+                    return back()->withErrors([
+                        'email' => 'Las credenciales proporcionadas no coinciden con nuestros registros!',
+                    ]);
+                }
+            }else{
+                return back()->withErrors([
+                    'email' => 'El correo no existe!',
+                ]);
+            }
+
+
+        }
+        /**
+         * Retorno la vista del login
+         */
+        return view('auth.login');
+    }
 }
