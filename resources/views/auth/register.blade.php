@@ -11,7 +11,7 @@
         @csrf
         <div id="step1">
             <div class="user-box"><br><br>
-                <select type="text" id="typeOfIdentification" name="typeOfIdentification" required>
+                <select type="text" id="typeOfIdentification" name="typeOfIdentification" >
                     <option style="background-color: gray;" value="T.I" selected>T.I</option>
                     <option style="background-color: gray;" value="C.C">C.C</option>
                     <option style="background-color: gray;" value="Pasaporte">Pasaporte</option>
@@ -21,19 +21,19 @@
             </div>
 
             <div class="user-box">
-                <input type="text" id="identification_num" name="identification_num" required
+                <input type="text" id="identification_num" name="identification_num"
                        onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
                 <label>Num. Documento</label>
             </div>
 
             <div class="user-box">
-                <input type="text" id="name" name="name" required
+                <input type="text" id="name" name="name"
                        onkeypress="return (event.charCode >=65 && event.charCode <=90 || event.charCode >=97 && event.charCode <=122 || event.charCode == 32)">
                 <label>Nombre</label>
             </div>
 
             <div class="user-box">
-                <input type="email" id="email" name="email" required
+                <input type="email" id="email" name="email"
                        onkeypress="return (event.charCode >= 48 && event.charCode <= 57 || event.charCode >=65 && event.charCode <=90 || event.charCode >=97 && event.charCode <=122 || event.charCode ==64 || event.charCode ==46 )">
                 <label>Correo electronico</label>
             </div>

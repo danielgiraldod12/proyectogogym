@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
-use DB;
+use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\Writer\Pdf;
 
 
@@ -28,14 +28,14 @@ class UsersExport implements FromCollection, WithHeadings, ShouldAutoSize, WithS
         ->leftJoin('asists','asists.id_user','=','users.id')
         ->select([ //Selecciono
             'users.id', //Id de Usuario
-            'users.name', //Nombre usuario
-            'users.email', //Email usuario
-            'users.typeOfIdentification', //Tipo de Doc
-            'users.identification_num', //Num de Doc
-            'record_nums.record_num', //Ficha del usuario con inner join
-            'training_programs.name_program', //Programa del usuario con inner join
-            'training_centers.name_center', //Centro del usuario con inner join
-            DB::raw('count(`asists`.`id_user`) as cantAsists')]) //Cant. de asistencias por usuario
+            'users.name as Nombre', //Nombre usuario
+            'users.email as Email', //Email usuario
+            'users.typeOfIdentification as Tipo Doc', //Tipo de Doc
+            'users.identification_num as Num Doc', //Num de Doc
+            'record_nums.record_num as Ficha', //Ficha del usuario con inner join
+            'training_programs.name_program as Programa', //Programa del usuario con inner join
+            'training_centers.name_center as Centro', //Centro del usuario con inner join
+            DB::raw('count(`asists`.`id_user`) as cantAsistencias')]) //Cant. de asistencias por usuario
         ->orderBy('id', 'asc') //Ordeno ascendentemente por el id
         ->groupBy('users.id') //Agrupo por el id de usuario
         ->get();

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\GeneralExport;
+use App\Models\Asist;
 use App\Models\UserRequest;
 use Dompdf\Dompdf;
 use Illuminate\Support\Facades\Auth;
@@ -29,6 +31,70 @@ use Illuminate\Database\QueryException;
 class AdminController extends Controller
 
 {
+    /**
+     * Retorna la informacion que tiene el archivo UsersExport ubicado en la carpeta
+     * app/Exports/UserExport.php y que lo haga en un archivo llamado usuarios.xlsx en
+     * formato Excel.
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function generalExcel(){
+
+        $users = User::query() //Creo la variable datatables con el modelo User y el metodo query
+        ->join('record_nums','record_nums.id', '=', 'users.id_record_num') //Inner join con la tabla ficha
+        ->join('training_programs','training_programs.id', '=', 'users.id_training_program') //Inner join con la tabla programa
+        ->join('training_centers','training_centers.id', '=', 'users.id_training_center') //Inner join con la tabla centro
+        ->leftJoin('asists','asists.id_user','=','users.id')
+            ->select([ //Selecciono
+                'users.id', //Id de Usuario
+                'users.name as Nombre', //Nombre usuario
+                'users.email as Email', //Email usuario
+                'users.typeOfIdentification as Tipo Doc', //Tipo de Doc
+                'users.identification_num as Num Doc', //Num de Doc
+                'record_nums.record_num as Ficha', //Ficha del usuario con inner join
+                'training_programs.name_program as Programa', //Programa del usuario con inner join
+                'training_centers.name_center as Centro', //Centro del usuario con inner join
+                DB::raw('count(`asists`.`id_user`) as cantAsistencias')]) //Cant. de asistencias por usuario
+            ->orderBy('id', 'asc') //Ordeno ascendentemente por el id
+            ->groupBy('users.id') //Agrupo por el id de usuario
+            ->get()->toArray();
+
+        $asists = Asist::query()
+            ->select([
+                'id', //Id asistencia
+                'name as Nombre', //Nombre al que pertenece la asistencia
+                'id_user as IdUsuario', //Id al que pertenece la asistencia
+                'record_num as Ficha', //Ficha al que pertenece la asistencia
+                'createdBy as Creada por', //Creado por
+            ])->selectRaw("DATE_FORMAT(created_at, '%d/%m/%Y') as Fecha") //Fecha en que se creo
+            ->selectRaw("DATE_FORMAT(created_at, '%h:%i %p') as Hora") //Hora en que se creo
+            ->orderBy('id','asc') //Ordenar ascendentemente por id
+            ->get()->toArray();
+
+        $record_nums = Record_num::query()
+            ->join('training_programs','training_programs.id','=','record_nums.id_training_program')
+            ->select([
+                'record_nums.record_num as Ficha',
+                'training_programs.name_program as Programa'
+            ])
+            ->get()->toArray();
+
+        $events = Event::query()
+        ->select([
+            'id',
+            'title as Titulo',
+            'description as Descripcion',
+            'date as Fecha',
+            'state as Estado',
+            'id_user as Creado por',
+            'created_at as Fecha de creacion'
+        ])->get()->toArray();
+
+        $arrays = [$users,$asists,$events,$record_nums];
+
+        return Excel::download(new GeneralExport($arrays), 'general.xlsx');
+    }
+
+
     /**
      * Retorna la informacion que tiene el archivo UsersExport ubicado en la carpeta
      * app/Exports/UserExport.php y que lo haga en un archivo llamado usuarios.xlsx en

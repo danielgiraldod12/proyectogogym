@@ -22,7 +22,7 @@ class RoleSeeder extends Seeder
 
         Permission::create(['name' => 'dashboard'])->syncRoles([$role1,$role2,$role3]);
         Permission::create(['name' => 'dompdfuser'])->syncRoles([$role1,$role2,$role3]);
-
+        Permission::create(['name' => 'exports'])->syncRoles([$role1,$role2,$role3]);
         Permission::create(['name' => 'asistencia'])->syncRoles([$role1,$role2,$role3]);
         Permission::create(['name' => 'createasistencia'])->syncRoles([$role1,$role2,$role3]);
         Permission::create(['name' => 'destroyasistencia'])->syncRoles([$role1,$role2]);

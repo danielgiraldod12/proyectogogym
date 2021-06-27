@@ -81,7 +81,7 @@
 {{--  Caja 5  --}}
 @can('users-requests')
 <div class="col-lg-3 col-6">
-    <div class="small-box bg-dark" style=" top: 5px">
+    <div class="small-box bg-cyan" style=" top: 5px">
         <div class="inner">
             <h3>{{$NumRequests->count()}}</h3>
             <p>Numero de Solicitudes</p>
@@ -95,6 +95,24 @@
         </a>
     </div>
 </div>
+@endcan
+{{--  Caja 6  --}}
+@can('exports')
+    <div class="col-lg-3 col-6">
+        <div class="small-box bg-dark" style=" top: 5px">
+            <div class="inner">
+                <h3>General</h3>
+                <p>Descargar Informe General</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <a class="small-box-footer" href="{{route('general.excel')}}">
+                Descargar
+                <i class="fas fa-arrow-circle-down"></i>
+            </a>
+        </div>
+    </div>
 @endcan
 @endsection
 

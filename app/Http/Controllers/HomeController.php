@@ -97,6 +97,15 @@ class HomeController extends Controller
     public function requestUser(Request $request){
 
         /**
+         * Validacion de los campos del form
+         */
+//        foreach($request->post() as $request){
+//            if(empty($request)){
+//                return redirect()->route('register')->with('message', 'Todos los campos son requeridos!');
+//            }
+//        }
+
+        /**
          * Hago una consulta a la tabla usuarios donde el num de doc sea igual a la que viene por el request
          * o donde el email sea igual a lo que viene por el request y cuento los registros que vienen
          * y lo guardo en la variable validation.

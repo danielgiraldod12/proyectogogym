@@ -67,5 +67,4 @@ class ExampleTest extends DuskTestCase
                 ->assertDontSee($user->email);
         });
     }
-
 }

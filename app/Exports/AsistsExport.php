@@ -21,10 +21,10 @@ class AsistsExport implements FromCollection, WithHeadings, ShouldAutoSize, With
         return Asist::query()
             ->select([
                 'id', //Id asistencia
-                'name', //Nombre al que pertenece la asistencia
-                'id_user', //Id al que pertenece la asistencia
-                'record_num', //Ficha al que pertenece la asistencia
-                'createdBy', //Creado por
+                'name as Nombre', //Nombre al que pertenece la asistencia
+                'id_user as IdUsuario', //Id al que pertenece la asistencia
+                'record_num as Ficha', //Ficha al que pertenece la asistencia
+                'createdBy as Creada por', //Creado por
             ])->selectRaw("DATE_FORMAT(created_at, '%d/%m/%Y') as Fecha") //Fecha en que se creo
             ->selectRaw("DATE_FORMAT(created_at, '%h:%i %p') as Hora") //Hora en que se creo
             ->orderBy('id','asc') //Ordenar ascendentemente por id
