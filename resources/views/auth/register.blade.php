@@ -48,32 +48,32 @@
 
         <div id="step2" class="d-none">
             <div class="user-box"><br><br>
-                <select type="text" id="id_record_num" name="id_record_num" required>
+                <select class="select" type="text" id="id_record_num" name="id_record_num" required>
                     @foreach($record_nums as $record_num)
                         <option style="background-color: gray;" value="{{$record_num->id}}">{{$record_num->record_num}}</option>
                     @endforeach
                 </select>
-                <label>Ficha</label>
+                <label style="color: orangered">Ficha</label>
             </div>
 
             <div class="user-box"><br><br>
-                <select type="text" id="id_training_program" name="id_training_program" required>
+                <select class="select" type="text" id="id_training_program" name="id_training_program" required>
                     @foreach($training_programs as $program)
                         <option style="background-color: gray;" value="{{$program->id}}">{{$program->name_program}}</option>
                     @endforeach
                 </select>
-                <label>Programa</label>
+                <label style="color: orangered">Programa</label>
             </div>
 
             <div class="user-box"><br><br>
-                <select type="text" id="id_training_center" name="id_training_center" required>
+                <select class="select" type="text" id="id_training_center" name="id_training_center" required>
                     @foreach($training_centers as $center)
                         <option style="background-color: gray;"  value="{{$center->id}}">{{$center->name_center}}</option>
                     @endforeach
                 </select>
-                <label>Centro</label>
+                <label style="color: orangered">Centro</label>
             </div>
-
+            <br>
             <button class="mt-2" onclick="secondStep(event)">Atras
                 <span></span>
                 <span></span>
@@ -103,8 +103,13 @@
 
 
 </form>
-
-
-
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script type="text/javascript">
+    $('.select').select2({
+        width: '330px',
+    });
+</script>
 @endsection
