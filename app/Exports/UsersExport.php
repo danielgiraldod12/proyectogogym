@@ -6,13 +6,14 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use App\Models\User;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\Writer\Pdf;
 
 
-class UsersExport implements FromCollection, WithHeadings, ShouldAutoSize, WithStyles
+class UsersExport implements FromCollection, WithHeadings, ShouldAutoSize, WithStyles, WithStrictNullComparison
 
 {
     /**

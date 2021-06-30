@@ -32,9 +32,9 @@ class AdminController extends Controller
 
 {
     /**
-     * Retorna la informacion que tiene el archivo UsersExport ubicado en la carpeta
-     * app/Exports/UserExport.php y que lo haga en un archivo llamado usuarios.xlsx en
-     * formato Excel.
+     * Retorna los arrays de usuarios, asistencias, fichas y eventos al archivo GeneralExports ubicado
+     * en la carpeta app/Exports/GeneralExport.php y que lo haga en un archivo llamado Informe General del Sistema - GoGym!.xlsx
+     * en formato Excel.
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
     public function generalExcel(){
@@ -91,28 +91,28 @@ class AdminController extends Controller
 
         $arrays = [$users,$asists,$events,$record_nums];
 
-        return Excel::download(new GeneralExport($arrays), 'general.xlsx');
+        return Excel::download(new GeneralExport($arrays), 'Informe General del Sistema - GoGym!.xlsx');
     }
 
 
     /**
      * Retorna la informacion que tiene el archivo UsersExport ubicado en la carpeta
-     * app/Exports/UserExport.php y que lo haga en un archivo llamado usuarios.xlsx en
+     * app/Exports/UserExport.php y que lo haga en un archivo llamado Informe de Usuarios - GoGym!.xlsx en
      * formato Excel.
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
     public function usersExcel(){
-        return Excel::download(new UsersExport, 'usuarios.xlsx');
+        return Excel::download(new UsersExport, 'Informe de Usuarios - GoGym!.xlsx');
     }
 
     /**
      * Retorna la informacion que tiene el archivo UsersExport ubicado en la carpeta
-     * app/Exports/AsistExport.php y que lo haga en un archivo llamado asistencias.xlsx en
+     * app/Exports/AsistExport.php y que lo haga en un archivo llamado Informe de Asistencias - GoGym!.xlsx en
      * formato Excel.
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
     public function asistsExcel(){
-        return Excel::download(new AsistsExport, 'asistencias.xlsx');
+        return Excel::download(new AsistsExport, 'Informe de Asistencias - GoGym!.xlsx');
     }
 
     /** Retorna la informacion de un usuario en especifico y me mande esa informacion a una vista

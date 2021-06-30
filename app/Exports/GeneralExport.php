@@ -8,9 +8,10 @@ use App\Models\Record_num;
 use App\Models\User;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class GeneralExport implements FromCollection, ShouldAutoSize
+class GeneralExport implements FromCollection, ShouldAutoSize, WithStrictNullComparison
 {
     private $collection;
 
