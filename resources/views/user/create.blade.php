@@ -2,6 +2,10 @@
 
 @section('title', 'Crear Usuario')
 
+{{--@push('css')--}}
+{{--    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />--}}
+{{--@endpush--}}
+
 @section('content')
 @if(Session::has('message'))
     <div class="alert alert-danger" role="alert">
@@ -50,7 +54,7 @@
                     </div>
                     <div class="form-group">
                         <label>Ficha</label>
-                        <select class="form-control" type="text" id="id_record_num" name="id_record_num" required>
+                        <select id="record" class="form-control" type="text" id="id_record_num" name="id_record_num" required>
                             <!--Hago un foreach en el select para que me traiga las diferentes fichas
                             que hay en la tabla fichas y me las muestre como opciones -->
                             @foreach ($queryFicha as $id)
@@ -60,7 +64,7 @@
                     </div>
                     <div class="form-group">
                         <label>Programa</label>
-                        <select class="form-control" type="text" id="id_training_program" name="id_training_program" required>
+                        <select id="program" class="form-control" type="text" id="id_training_program" name="id_training_program" required>
                             <!--Hago un foreach en el select para que me traiga los diferentes programas
                             que hay en la tabla programas y me los muestre como opciones -->
                             @foreach ($queryPrograma as $id)
@@ -70,7 +74,7 @@
                     </div>
                     <div class="form-group">
                         <label>Centro</label>
-                        <select class="form-control" type="text" id="id_training_center" name="id_training_center" required>
+                        <select id="center" class="form-control" type="text" id="id_training_center" name="id_training_center" required>
                             <!--Hago un foreach en el select para que me traiga los diferentes centros
                             que hay en la tabla centros y me los muestre como opciones -->
                             @foreach ($queryCentro as $id)
@@ -95,4 +99,12 @@
     </div>
     </div>
 </div>
+{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>--}}
+{{--<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>--}}
+{{--<script type="text/javascript">--}}
+{{--    $('#record').select2({--}}
+{{--        width: '330px',--}}
+{{--    });--}}
+
+{{--</script>--}}
 @endsection
