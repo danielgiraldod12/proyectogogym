@@ -186,6 +186,7 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
      */
     public function login(Request $request){
+
         /**
          * Traigo la informacion del post
          */
@@ -198,24 +199,24 @@ class HomeController extends Controller
             /**
              * Busco el usuario con el email
              */
-            $user = User::query()->where('email',$request->email)
+            $roles = User::query()->where('email',$request->email)
                 ->leftJoin('model_has_roles','model_has_roles.model_id','=','users.id')
                 ->leftJoin('roles','roles.id','=','model_has_roles.role_id')
                 ->select([
                     'users.email',
                     'roles.name as rol'
-                ])
-                ->first();
+                ]);
             /**
              * Si da true, significa que si hay un usuario registrado con el
              * email que se envio, si da false es porque no existe un registro con ese email
              */
+            $user = $roles->first();
             if($user){
                 /**
                  * Si el usuario tiene como rol usuario, o no tiene rol
                  * no lo dejamos iniciar sesion
                  */
-                if($user->rol == 'Usuario' || $user->rol == null){
+                if(!User::validateRoles($roles->get()) || $user->rol == null){
                     return back()->withErrors(['email' => 'No tienes suficientes permisos para iniciar sesión']);
                 }else{
                     /**

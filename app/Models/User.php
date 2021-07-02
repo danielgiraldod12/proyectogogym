@@ -26,6 +26,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $password
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @function validateRoles
  * @package App\Models
  */
 
@@ -136,6 +137,23 @@ class User extends Authenticatable
      */
     public function eventos(){
         return $this->hasMany('App\Models\Event');
+    }
+
+    /**
+     * Recibe los roles de un usuario y verifica si en estos roles existe un rol con un nombre diferente al
+     * de "Usuario", en caso de que si haya un rol diferente al de Usuario, retornara un true, de lo contrario
+     * retornara un false.
+     * exista
+     * @param $roles
+     * @return bool
+     */
+    public static function validateRoles($roles){
+        foreach($roles->toArray() as $role){
+            if($role['rol'] != 'Usuario'){
+                return true;
+            }
+            return false;
+        }
     }
 }
 
