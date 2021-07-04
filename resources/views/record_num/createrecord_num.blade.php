@@ -3,6 +3,12 @@
 @section('title', 'Crear Fichas')
 
 @section('content')
+
+@section('css')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="{{asset('css/select2.css')}}" rel="stylesheet" />
+@endsection
+
 @if(Session::has('message'))
     <div class="alert alert-danger" role="alert">
         {{ Session::get('message') }}
@@ -25,7 +31,7 @@
                 </div>
                 <div class="form-group">
                     <label>Programa</label>
-                    <select class="form-control" type="text" id="id_training_program" name="id_training_program" required>
+                    <select id="program" class="form-control" type="text" id="id_training_program" name="id_training_program" required>
                         <!--Hago un foreach en el select para que me traiga los diferentes programas
                         que hay en la tabla programas y me los muestre como opciones -->
                         @foreach ($queryPrograma as $id)
@@ -38,4 +44,12 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $('#program').select2();
+    </script>
 @endsection

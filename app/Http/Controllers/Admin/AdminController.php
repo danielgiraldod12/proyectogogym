@@ -284,15 +284,15 @@ class AdminController extends Controller
     public function edit(User $id){
         /** Hago las querys de cada tabla para posteriormente usarlas en los selects
         del formulario edit */
-        $training_center = Training_center::all();
-        $training_program = Training_program::all();
-        $record_num = Record_num::all();
+        $training_centers = Training_center::all();
+        $training_programs = Training_program::all();
+        $record_nums = Record_num::all();
 
         /**
          * Retorno a la vista del formulario y con el compact le digo que estas variables que
          * defini en esta funcion, las podra utilizar en la vista.
          */
-        return view('user/edit', compact('id','training_program','training_center','record_num'));
+        return view('user/edit', compact('id','training_programs','training_centers','record_nums'));
     }
 
     /**

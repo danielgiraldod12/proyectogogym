@@ -2,9 +2,10 @@
 
 @section('title', 'Crear Usuario')
 
-{{--@push('css')--}}
-{{--    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />--}}
-{{--@endpush--}}
+@section('css')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="{{asset('css/select2.css')}}" rel="stylesheet" />
+@endsection
 
 @section('content')
 @if(Session::has('message'))
@@ -99,12 +100,14 @@
     </div>
     </div>
 </div>
-{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>--}}
-{{--<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>--}}
-{{--<script type="text/javascript">--}}
-{{--    $('#record').select2({--}}
-{{--        width: '330px',--}}
-{{--    });--}}
+@endsection
 
-{{--</script>--}}
+@section('js')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $('#record').select2();
+        $('#program').select2();
+        $('#center').select2();
+    </script>
 @endsection

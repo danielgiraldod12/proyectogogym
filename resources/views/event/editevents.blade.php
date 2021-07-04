@@ -2,6 +2,11 @@
 
 @section('title', 'Editar Evento')
 
+@section('css')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="{{asset('css/select2.css')}}" rel="stylesheet" />
+@endsection
+
 @section('content')
 <div class="d-flex justify-content-center">
     <div class="card w-50">
@@ -32,7 +37,7 @@
             </div>
             <div class="form-group">
                 <label>Descripcion del evento</label>
-                <textarea  class="form-control " type="textarea" id="description" name="description" required cols="10" rows="10">{{old('description',$id->description)}}</textarea>
+                <textarea  class="form-control " type="textarea" id="description" name="description" maxlength="50" required cols="3" rows="3">{{old('description',$id->description)}}</textarea>
                 <br>
                 @error('description')
                 <small  style="color: red; font-size: 15px;">*{{$message}}</small>
@@ -46,8 +51,8 @@
                 que el usuario tenga guardada en la bd-->
                 @php($selected =!empty($id->state) ? $id->state : '')
                 <select class="form-control" type="text" id="state" name="state" required>
-                    <option value="Activo" {{$selected=="Activo" ? 'selected':''}}>Activo</option>
-                    <option value="Desactivado" {{$selected=="Desactivado" ? 'selected':''}} style="font-weight: bold">Desactivado</option>
+                    <option id="Activo" value="Activo" {{$selected=="Activo" ? 'selected':''}}>Activo</option>
+                    <option id="Desactivado" value="Desactivado" {{$selected=="Desactivado" ? 'selected':''}} style="font-weight: bold">Desactivado</option>
                 </select>
                 <br>
                 @error('state')
@@ -69,4 +74,11 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="{{asset('js/datatables.js')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        var selectedState = $('#{{$id->state}}').val();
+
+        $('#state').select2().val(selectedState).trigger('change');
+    </script>
 @endsection

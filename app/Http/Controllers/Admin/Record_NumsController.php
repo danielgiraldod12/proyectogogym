@@ -101,11 +101,11 @@ class Record_NumsController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function editrn(Record_num $id){
-        $training_program = Training_program::all();
+        $training_programs = Training_program::all();
 
         $query = $id; //Le mando la id
 
-        return view('record_num/editrecord_num', compact('id','query','training_program'));
+        return view('record_num/editrecord_num', compact('id','query','training_programs'));
     }
 
     /**
